@@ -1,0 +1,15 @@
+#
+# Shelly1pm binary sensor
+# 192.168.xxx.xxx Washing machine
+- platform: mqtt
+  name: "Overtemperature Washingmachine"
+  state_topic: "shellies/shelly1pm-xxxxxx/overtemperature"
+  payload_on: "1"
+  payload_off: "0"
+  device_class: heat
+- platform: mqtt
+  name: "Washingmachine"
+  state_topic: "shellies/shelly1pm-xxxxxx/relay/0"
+  payload_on: "on"
+  payload_off: "off"
+  device_class: plug
