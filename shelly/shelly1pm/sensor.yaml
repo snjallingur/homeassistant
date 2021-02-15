@@ -1,0 +1,11 @@
+# Shelly1pm Washingmachine
+# ip: http://192.168.xxx.xxx
+- platform: mqtt
+  name: "Power Washingmachine"
+  state_topic: "shellies/shelly1pm-xxxxxx/relay/0/power"
+- platform: mqtt
+  name: "Energy Washingmachine"
+  state_topic: "shellies/shelly1pm-xxxxxx/relay/0/energy"
+- platform: mqtt
+  name: "Device temperature Washingmachine"
+  state_topic: "shellies/shelly1pm-xxxxxx/temperature"
