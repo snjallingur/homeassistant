@@ -1,3 +1,0 @@
- #
-30 3    1 * *   root    sh /home/homeassistant/.homeassistant/homeassistant_upgrade.sh
-15 5    * * 4   root    apt-get update > /home/homeassistant/.homeassistant/snjallingur_update.log
