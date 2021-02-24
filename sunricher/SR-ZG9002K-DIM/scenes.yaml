@@ -1,0 +1,48 @@
+- id: 'guest_light_1'
+  name: Guest_light_1
+  entities:
+    light.light_guest_window:
+      brightness: 79
+      friendly_name: Light Guest window
+      supported_features: 41_
+      icon: mdi:lightbulb-outline
+      state: 'on'
+    light.light_guest_middle:
+      brightness: 66
+      friendly_name: Light Guest middle
+      supported_features: 41
+      icon: mdi:lightbulb-outline
+      state: 'on'
+  icon: mdi:lightbulb-outline
+- id: 'guest_light_2'
+  name: Guest_light_2
+  entities:
+    light.light_guest_window:
+      brightness: 160
+      friendly_name: Light Guest window
+      supported_features: 41
+      icon: mdi:lightbulb-outline
+      state: 'on'
+    light.light_guest_middle:
+      brightness: 160
+      friendly_name: Light Guest middle
+      supported_features: 41
+      icon: mdi:lightbulb-outline
+      state: 'on'
+  icon: mdi:lightbulb-outline
+- id: 'guest_light_3'
+  name: Guest_light_3
+  entities:
+    light.light_guest_window:
+      brightness: 250
+      friendly_name: Light Guest window
+      supported_features: 41
+      icon: mdi:lightbulb-outline
+      state: 'on'
+    light.light_guest_middle:
+      brightness: 250
+      friendly_name: Light Guest middle
+      supported_features: 41
+      icon: mdi:lightbulb-outline
+      state: 'on'
+  icon: mdi:lightbulb-outline
