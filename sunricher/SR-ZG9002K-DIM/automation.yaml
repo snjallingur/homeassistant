@@ -1,0 +1,43 @@
+- id: 'remote_zigbee_single_switch'
+  alias: Remote switch 1 light
+  description: 'Automation triggered by the button pushs from a Sunricher Zigbee remote model SR-ZG9001K-DIM.'
+  trigger:
+  - platform: event
+    event_type: zha_event
+    event_data:
+      device_ieee: xx:xx:xx:xx:xx:xx:xx:xx
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: template
+        value_template: '{{ ''move_with_on_off'' in trigger.event.data.command }}'
+      sequence:
+      - service: scene.turn_on
+        data:
+          entity_id: scene.guest_light_1_{{ states.input_select.remote_single_switch.state
+            }}
+      - service: input_select.select_next
+        data: {}
+        entity_id: input_select.remote_single_switch
+      - service: notify.triggerdata
+        data:
+          message: Command received is {{ trigger.event.data.command }}
+    - conditions:
+      - condition: or
+        conditions:
+        - condition: template
+          value_template: '{{ ''on'' in trigger.event.data.command }}'
+        - condition: template
+          value_template: '{{ ''off'' in trigger.event.data.command }}'
+      sequence:
+      - service: light.turn_{{ trigger.event.data.command }}
+        data:
+          entity_id: light.light_guest_window
+      - service: light.turn_{{ trigger.event.data.command }}
+        data:
+          entity_id: light.light_guest_middle
+        entity_id: light.light_guest_middle
+    default: []
+  mode: single
+
