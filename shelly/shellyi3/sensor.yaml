@@ -1,0 +1,19 @@
+# Mqtt sensor for Shelly i3
+- platform: mqtt
+  name: Shellyi3-0
+  state_topic: "shellies/shellyix3-xxxxxx/input_event/0"
+  value_template: "{{ value_json['event'] }}"
+  json_attributes_topic: "shellies/shellyix3-xxxxxx/input_event/0"
+  json_attributes_template: "{{ value_json | tojson }}"
+- platform: mqtt
+  name: Shellyi3-1
+  state_topic: "shellies/shellyix3-xxxxxx/input_event/1"
+  value_template: "{{ value_json['event'] }}"
+  json_attributes_topic: "shellies/shellyix3-xxxxxx/input_event/1"
+  json_attributes_template: "{{ value_json | tojson }}"
+- platform: mqtt
+  name: Shellyi3-2
+  state_topic: "shellies/shellyix3-xxxxxx/input_event/2"
+  value_template: "{{ value_json['event'] }}"
+  json_attributes_topic: "shellies/shellyix3-xxxxxx/input_event/2"
+  json_attributes_template: "{{ value_json | tojson }}"
