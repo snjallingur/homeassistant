@@ -1,0 +1,38 @@
+# automations that sets the status of the binary sensor after switch has been toggled
+#
+
+- id: '1614685010220'
+  alias: RF plug update state
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: switch.rfplug_2
+    from: 'on'
+    to: 'off'
+  - platform: state
+    entity_id: switch.rfplug_2
+    from: 'off'
+    to: 'on'
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: template
+        value_template: '{{ trigger.to_state.state == "on" }}'
+      sequence:
+      - service: mqtt.publish
+        data:
+          topic: tele/rfbridge/RESULT
+          retain: true
+          payload: "{\n  \"rfplug2_status\": \"on\" \n}"
+    - conditions:
+      - condition: template
+        value_template: '{{ trigger.to_state.state == "off" }}'
+      sequence:
+      - service: mqtt.publish
+        data:
+          topic: tele/rfbridge/RESULT
+          retain: true
+          payload: "{\n  \"rfplug2_status\": \"off\" \n}"
+    default: []
+  mode: single
