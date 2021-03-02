@@ -1,0 +1,11 @@
+#
+# RF plug 2
+- platform: mqtt
+  name: RFplug 2
+  icon: mdi:power-socket-eu
+  command_topic: "cmnd/rfbridge/Backlog"
+  payload_on: "RfRaw AAB02103140140047E2CA62818181908190819081908181819081908190819081909090855; RfRaw 0"
+  payload_off: "RfRaw AAB0210314017C044C2C922818181908190819081908181819081908190819081908181855; RfRaw 0"
+  optimistic: true
+  qos: 1
+  retain: true
