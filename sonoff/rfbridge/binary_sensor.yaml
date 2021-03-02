@@ -1,0 +1,22 @@
+# 
+# RF plug 2 sensor
+- platform: mqtt
+  name: "rfplug2 status"
+  state_topic: "tele/rfbridge/RESULT"
+  value_template: >-
+    {% if 'RfReceived' in value_json %}
+      {% if value_json.RfReceived.Data == "154557" %}
+        ON
+      {% elif value_json.RfReceived.Data == "154554" %}
+        OFF    
+      {% endif %}
+    {% elif 'rfplug2_status' in value_json %}
+      {% if value_json['rfplug2_status'] == "on" %} 
+        ON
+      {% elif value_json['rfplug2_status'] == "off" %} 
+        OFF
+      {% endif %}
+    {% endif %}   
+  #off_delay: 0
+  device_class: plug
+  qos: 1
