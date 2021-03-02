@@ -1,2 +1,2 @@
-# homeassistant
-Home Assistant basic configuration
+# Home Assistant
+Home Assistant configuration files and setup instructions
