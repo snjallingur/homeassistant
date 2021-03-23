@@ -16,6 +16,10 @@ sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev li
 wget -O cloudflared https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-arm64
 sudo mv cloudflared /usr/local/bin
 sudo chmod +x /usr/local/bin/cloudflared
+wget https://nodejs.org/dist/v14.16.0/node-v14.16.0-linux-armv7l.tar.xz
+tar -xf node-v14.16.0-linux-armv7l.tar.xz
+cd node-v14.16.0-linux-armv7l
+sudo cp -R * /usr/local/
 curl -fsSL https://code-server.dev/install.sh | sh
 sudo useradd -rm homeassistant -G dialout,gpio,i2c
 sudo gpasswd -a homeassistant dialout
@@ -23,6 +27,8 @@ sudo mkdir /srv/homeassistant
 sudo chown homeassistant:homeassistant /srv/homeassistant
 # Homeassistant Service
 sudo bash -c 'cat  homeassistant_service.txt > /etc/systemd/system/home-assistant@homeassistant.service'
+# Code-Server Service
+sudo bash -c 'cat  code-server_service.txt > /etc/systemd/system/code-server@homeassistant.service'
 # mysql
 sudo apt-get install libmariadb-dev-compat libmariadb-dev mariadb-server
 sudo mysql_secure_installation
@@ -57,7 +63,7 @@ cd /srv/homeassistant
 python3.8 -m venv .
 source /srv/homeassistant/bin/activate
 pip3.8 install wheel setuptools mysql-connector-python numpy imutils pymysql mysql
-pip3.8 install mysql-connector-python-rf homeassistant 
+pip3.8 install mysql-connector-python-rf homeassistant==2021.3.4
 
 
 
