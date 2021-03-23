@@ -38,6 +38,7 @@ sudo bash -c 'cat  cron.txt >> /etc/crontab'
 # htaccess
 # sudo nano /var/www/html/.htaccess
 # Cloudflared
+sudo mkdir /etc/cloudflared
 sudo bash -c 'cat  cloudflare.txt > /etc/cloudflared/config.yml'
 # reload services and enable them
 sudo systemctl enable --now code-server@homeassistant
