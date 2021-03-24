@@ -13,7 +13,8 @@ sudo apt-get install mosquitto mosquitto-clients
 sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python-openssl
 sudo apt-get install golang
 sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python-openssl
-wget -O cloudflared https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-arm64
+wget -O https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-arm64
+#https://bin.equinox.io/c/VdrWdbjqyF/cloudflared-stable-linux-arm.deb
 sudo mv cloudflared /usr/local/bin
 sudo chmod +x /usr/local/bin/cloudflared
 wget https://nodejs.org/dist/v14.16.0/node-v14.16.0-linux-armv7l.tar.xz
@@ -56,6 +57,9 @@ EOF
 source /home/homeassistant/.bashrc
 pyenv install -v 3.8.7
 pyenv global 3.8.7
+#install Rust for gsutil
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+source $HOME/.cargo/env
 #install Python modules
 pip install BeautifulSoup4 lxml bs4 requests paho-mqtt pypi DateTime
 pip install google-cloud google-cloud-storage pycurl mysql-connector-python-rf mysql-connector-python numpy imutils pymysql mysql
