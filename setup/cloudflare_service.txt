@@ -1,6 +1,16 @@
-tunnel: snjallingur
-hostname: snjallingur.snjallingur.is
-url: http://snjallingur:8123
-logfile: /var/log/cloudflared.log
-#credentials-file: /home/pi/.cloudflared/cert.pem
-origincert: /home/pi/.cloudflared/cert.pem
+[Unit]
+Description=Argo Tunnel
+After=network.target
+StandardOutput=append:/var/log/cloudflared.log
+StandardError=append:/var/log/cloudflared_error.log
+
+
+[Service]
+TimeoutStartSec=0
+Type=notify
+ExecStart=/usr/local/bin/cloudflared --config /etc/cloudflared/config.yml --no-autoupdate tunnel run
+Restart=on-failure
+RestartSec=5s
+
+[Install]
+WantedBy=multi-user.targe
