@@ -4,7 +4,6 @@ After=network.target
 StandardOutput=append:/var/log/cloudflared.log
 StandardError=append:/var/log/cloudflared_error.log
 
-
 [Service]
 TimeoutStartSec=0
 Type=notify
