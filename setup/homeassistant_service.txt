@@ -2,6 +2,9 @@
 [Unit]
 Description=Home Assistant
 After=network-online.target mysql.service
+StandardOutput=append:/var/log/homeassistant.log
+StandardError=append:/var/log/homeassistant_error.log
+
 
 [Service]
 Type=simple
