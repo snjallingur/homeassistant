@@ -1,0 +1,17 @@
+# REST sensor for Shelly 1,1PM,2.5
+# Motion Sensor Garage
+- platform: rest
+  name: Shelly Wifi strength
+  resource: http://192.168.xxx.xxx/status
+  value_template: '{{ value_json["wifi_sta"]["rssi"] }}'
+  scan_interval: 7200
+  
+# Temperature sensor from Shelly 1/1PM
+- platform: mqtt
+  name: "temperature_floorheating_back"
+  device_class: temperature
+  state_topic: "shellies/shelly1pm-B915D1/ext_temperatures"
+  unit_of_measurement: "\u00B0C"
+  value_template: "{{ value_json['0']['tC'] }}"
+  json_attributes_topic: "shellies/shelly1pm-B915D1/ext_temperatures"
+  json_attributes_template: "{{ value_json['0'] | tojson }}"
