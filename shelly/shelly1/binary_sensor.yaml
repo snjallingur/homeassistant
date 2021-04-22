@@ -1,0 +1,23 @@
+# binary mqtt sensor reed sensor
+- platform: mqtt
+  name: "Door sensor"
+  state_topic: "shellies/shelly1-xxxxxx/ext_switch/0"
+  device_class: door
+  payload_on: "1"
+  payload_off: "0"
+ 
+# binary mqtt sensor for Motion Sensors using the switch input
+- platform: mqtt
+  name: "Motion sensor"
+  state_topic: "shellies/shelly1-xxxxxx/input/0"
+  payload_on: "1"
+  payload_off: "0"
+  device_class: motion
+
+# binary mqtt sensor for showing switch status
+- platform: mqtt
+  name: "Plug Washingmachine"
+  state_topic: "shellies/shelly1-xxxxxx/relay/0"
+  payload_on: "on"
+  payload_off: "off"
+  device_class: plug
