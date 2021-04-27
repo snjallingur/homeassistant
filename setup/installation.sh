@@ -13,6 +13,7 @@ sudo apt-get install -y mosquitto mosquitto-clients
 sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python-openssl
 sudo apt-get install -y golang
 curl -fsSL https://code-server.dev/install.sh | sh
+#for Linux
 wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-arm64
 #https://bin.equinox.io/c/VdrWdbjqyF/cloudflared-stable-linux-arm.deb
 sudo mv cloudflared /usr/local/bin
