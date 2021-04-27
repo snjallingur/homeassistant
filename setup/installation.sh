@@ -11,16 +11,12 @@ sudo apt-get install -y libasound2-dev dh-autoreconf libortp-dev pulseaudio-modu
 sudo apt-get install -y libxkbfile-dev libsecret-1-dev libjpeg-dev zlib1g-dev
 sudo apt-get install -y mosquitto mosquitto-clients
 sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python-openssl
-sudo apt-get install golang
+sudo apt-get install -y golang
+curl -fsSL https://code-server.dev/install.sh | sh
 wget -O https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-arm64
 #https://bin.equinox.io/c/VdrWdbjqyF/cloudflared-stable-linux-arm.deb
 sudo mv cloudflared /usr/local/bin
 sudo chmod +x /usr/local/bin/cloudflared
-wget https://nodejs.org/dist/v14.16.0/node-v14.16.0-linux-armv7l.tar.xz
-tar -xf node-v14.16.0-linux-armv7l.tar.xz
-cd node-v14.16.0-linux-armv7l
-sudo cp -R * /usr/local/
-curl -fsSL https://code-server.dev/install.sh | sh
 sudo useradd -rm homeassistant -G dialout,gpio,i2c
 sudo gpasswd -a homeassistant dialout
 sudo mkdir /srv/homeassistant
@@ -44,8 +40,15 @@ sudo bash -c 'cat  cloudflare.txt > /etc/cloudflared/config.yml'
 sudo systemctl enable --now code-server@homeassistant
 sudo systemctl enable home-assistant@homeassistant
 sudo systemctl --system daemon-reload
+#install nodejs
+wget https://nodejs.org/dist/v14.16.0/node-v14.16.0-linux-armv7l.tar.xz
+tar -xf node-v14.16.0-linux-armv7l.tar.xz
+cd node-v14.16.0-linux-armv7l
+sudo cp -R * /usr/local/
+cd ..
 #act as Homeassistant user
 sudo -u homeassistant -H -s
+cd /home/homeassistant
 #install pyenv
 curl https://pyenv.run | bash
 cat >> /home/homeassistant/.bashrc <<'EOF'
@@ -61,13 +64,13 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 source $HOME/.cargo/env
 #install Python modules
 pip install BeautifulSoup4 lxml bs4 requests paho-mqtt pypi DateTime
-pip install google-cloud google-cloud-storage pycurl mysql-connector-python-rf mysql-connector-python numpy imutils pymysql mysql
+pip install google-cloud google-cloud-storage pycurl mysql-connector-python numpy imutils pymysql mysql
 #install Homeassistant
 cd /srv/homeassistant
 python3.8 -m venv .
 source /srv/homeassistant/bin/activate
 pip3.8 install wheel setuptools mysql-connector-python numpy imutils pymysql mysql
-pip3.8 install mysql-connector-python-rf homeassistant==2021.3.4
+pip3.8 install homeassistant==2021.3.4
 #install HACS
 wget -q -O - https://install.hacs.xyz | bash -
 
