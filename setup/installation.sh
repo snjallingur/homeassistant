@@ -1,18 +1,17 @@
 #!/bin/bash
 #sudo apt-get update
 #sudo apt-get upgrade
-sudo apt-get install python-certbot-apache python-pycurl python-dev python-gobject python-gobject-2 git libdbus-1-dev libdbus-glib-1-dev build-essential libssl-dev libffi-dev python-dev python3-requests
-sudo apt-get install libffi-dev libssl-dev libxml2-dev libxslt-dev libcurl4-openssl-dev
-sudo apt-get install libjpeg-dev libtiff5-dev libpng-dev libavcodec-dev libavformat-dev libswscale-dev libv4l-dev libxvidcore-dev libx264-dev python3-opencv python3-bs4 libatlas-base-dev
-sudo apt-get install libavahi-compat-libdnssd-dev ffmpeg git  zip unzip libmosquitto-dev certbot
-sudo apt-get install libxml2-utils libssl-doc libcurl4-gnutls-dev libmariadb-dev 
-sudo apt-get install pkg-config libavformat-dev libavcodec-dev libavdevice-dev libavutil-dev libswscale-dev libavresample-dev libavfilter-dev 
-sudo apt-get install libasound2-dev dh-autoreconf libortp-dev pulseaudio-module-bluetooth bluez bluetooth bluez-tools libbluetooth-dev libusb-dev libglib2.0-dev libudev-dev libical-dev libreadline-dev libsbc1 libsbc-dev libomxil-bellagio-dev libturbojpeg0
-sudo apt-get install libxkbfile-dev libsecret-1-dev libjpeg-dev zlib1g-dev
-sudo apt-get install mosquitto mosquitto-clients
+sudo apt-get install -y python-certbot-apache python-pycurl python-dev python-gobject python-gobject-2 git libdbus-1-dev libdbus-glib-1-dev build-essential libssl-dev libffi-dev python-dev python3-requests
+sudo apt-get install -y libffi-dev libssl-dev libxml2-dev libxslt-dev libcurl4-openssl-dev
+sudo apt-get install -y libjpeg-dev libtiff5-dev libpng-dev libavcodec-dev libavformat-dev libswscale-dev libv4l-dev libxvidcore-dev libx264-dev python3-opencv python3-bs4 libatlas-base-dev
+sudo apt-get install -y libavahi-compat-libdnssd-dev ffmpeg git  zip unzip libmosquitto-dev certbot
+sudo apt-get install -y libxml2-utils libssl-doc libcurl4-gnutls-dev libmariadb-dev 
+sudo apt-get install -y pkg-config libavformat-dev libavcodec-dev libavdevice-dev libavutil-dev libswscale-dev libavresample-dev libavfilter-dev 
+sudo apt-get install -y libasound2-dev dh-autoreconf libortp-dev pulseaudio-module-bluetooth bluez bluetooth bluez-tools libbluetooth-dev libusb-dev libglib2.0-dev libudev-dev libical-dev libreadline-dev libsbc1 libsbc-dev libomxil-bellagio-dev libturbojpeg0
+sudo apt-get install -y libxkbfile-dev libsecret-1-dev libjpeg-dev zlib1g-dev
+sudo apt-get install -y mosquitto mosquitto-clients
 sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python-openssl
 sudo apt-get install golang
-sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python-openssl
 wget -O https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-arm64
 #https://bin.equinox.io/c/VdrWdbjqyF/cloudflared-stable-linux-arm.deb
 sudo mv cloudflared /usr/local/bin
