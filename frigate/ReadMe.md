@@ -1,9 +1,9 @@
-#Setup Docker
-##Pull docker image:
+## Setup Docker
+## Pull docker image:
 ```
 docker pull blakeblackshear/frigate:dev-34c7697-arm64 
 ```
-##Run Docker container:
+## Run Docker container:
 ```
 docker run -d \
   --name frigate \
