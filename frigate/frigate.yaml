@@ -1,0 +1,61 @@
+#ffmpeg:
+#  hwaccel_args:
+#    - '-c:v'
+#    - h264_v4l2m2m
+detectors:
+  coral:
+    type: cpu
+mqtt:
+  host: skogarflot26
+  topic_prefix: frigate
+  client_id: frigate
+cameras:
+  garage:
+    ffmpeg:
+      inputs:
+        - path: rtsp://familieeck:SK26webcam!@192.168.132.20:554//h264Preview_01_main
+          roles:
+            - detect
+            - rtmp
+    width: 2560
+    height: 1920
+    fps: 5
+objects:
+  # Optional: list of objects to track from labelmap.txt (default: shown below)
+  track:
+    - person
+    - bicycle
+    - car
+    - cat
+    - dog
+motion:
+  # Optional: The threshold passed to cv2.threshold to determine if a pixel is different enough to be counted as motion. (default: shown $
+  # Increasing this value will make motion detection less sensitive and decreasing it will make motion detection more sensitive.
+  # The value should be between 1 and 255.
+  threshold: 75
+  # Optional: Minimum size in pixels in the resized motion image that counts as motion
+  # Increasing this value will prevent smaller areas of motion from being detected. Decreasing will make motion detection more sensitive $
+  # moving objects.
+  contour_area: 100
+  # Optional: Alpha value passed to cv2.accumulateWeighted when averaging the motion delta across multiple frames (default: shown below)
+  # Higher values mean the current frame impacts the delta a lot, and a single raindrop may register as motion.
+  # Too low and a fast moving person wont be detected as motion.
+  delta_alpha: 0.2
+  # Optional: Alpha value passed to cv2.accumulateWeighted when averaging frames to determine the background (default: shown below)
+  # Higher values mean the current frame impacts the average a lot, and a new object will be averaged into the background faster.
+  # Low values will cause things like moving shadows to be detected as motion for longer.
+  # https://www.geeksforgeeks.org/background-subtraction-in-an-image-using-concept-of-running-average/
+  frame_alpha: 0.2
+  # Optional: Height of the resized motion frame  (default: 1/6th of the original frame height)
+  # This operates as an efficient blur alternative. Higher values will result in more granular motion detection at the expense of higher $
+  # Lower values result in less CPU, but small changes may not register as motion.
+  #frame_height: 180
+detect:
+  # Optional: Number of frames without a detection before frigate considers an object to be gone. (default: 5x the frame rate)
+  max_disappeared: 25
+logger:
+  # Optional: default log level (default: shown below)
+  default: info
+  # Optional: module by module log level configuration
+  logs:
+    frigate.mqtt: error
