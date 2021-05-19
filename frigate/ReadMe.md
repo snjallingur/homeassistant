@@ -8,6 +8,7 @@ docker pull blakeblackshear/frigate:dev-34c7697-arm64
 docker run -d \
   --name frigate \
   --restart=unless-stopped \
+  --mount type=tmpfs,target=/home/homeassistant/Videos/cache,tmpfs-size=1000000000 \
   -e FRIGATE_RTSP_PASSWORD='frigatecd ' \
   -v /home/homeassistant/.homeassistant/frigate.yaml:/config/config.yml:ro \
   -v /home/homeassistant/Videos/Frigate:/media/frigate \
