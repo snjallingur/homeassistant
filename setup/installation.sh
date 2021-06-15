@@ -76,7 +76,7 @@ cd /srv/homeassistant
 python3.8 -m venv .
 source /srv/homeassistant/bin/activate
 pip3.8 install wheel setuptools mysql-connector-python numpy imutils pymysql mysql
-pip3.8 install homeassistant==2021.3.4
+pip3.8 install homeassistant==2021.5.4
 #install HACS
 wget -q -O - https://install.hacs.xyz | bash -
 
