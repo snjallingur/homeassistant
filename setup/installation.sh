@@ -14,10 +14,15 @@ sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev li
 sudo apt-get install -y golang
 curl -fsSL https://code-server.dev/install.sh | sh
 #for Linux
-wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-arm64
+#wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-arm64
 #https://bin.equinox.io/c/VdrWdbjqyF/cloudflared-stable-linux-arm.deb
+https://bin.equinox.io/c/VdrWdbjqyF/cloudflared-stable-linux-arm.deb
+mkdir argo-tunnel
+$ tar -xvzf cloudflared-stable-linux-arm.tgz -C ./argo-tunnel
+cd argo-tunnel
 sudo mv cloudflared /usr/local/bin
 sudo chmod +x /usr/local/bin/cloudflared
+cd ..
 sudo useradd -rm homeassistant -G dialout,gpio,i2c
 sudo gpasswd -a homeassistant dialout
 sudo mkdir /srv/homeassistant
