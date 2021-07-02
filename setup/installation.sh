@@ -18,7 +18,7 @@ curl -fsSL https://code-server.dev/install.sh | sh
 #https://bin.equinox.io/c/VdrWdbjqyF/cloudflared-stable-linux-arm.deb
 wget https://bin.equinox.io/c/VdrWdbjqyF/cloudflared-stable-linux-arm.deb
 mkdir argo-tunnel
-$ tar -xvzf cloudflared-stable-linux-arm.tgz -C ./argo-tunnel
+tar -xvzf cloudflared-stable-linux-arm.tgz -C ./argo-tunnel
 cd argo-tunnel
 sudo mv cloudflared /usr/local/bin
 sudo chmod +x /usr/local/bin/cloudflared
