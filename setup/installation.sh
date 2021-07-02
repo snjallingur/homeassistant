@@ -32,7 +32,7 @@ sudo bash -c 'cat  homeassistant_service.txt > /etc/systemd/system/home-assistan
 # Code-Server Service
 sudo bash -c 'cat  code-server_service.txt > /etc/systemd/system/code-server@homeassistant.service'
 # mysql
-sudo apt-get install libmariadb-dev-compat libmariadb-dev mariadb-server
+sudo apt-get install -y libmariadb-dev-compat libmariadb-dev mariadb-server
 sudo mysql_secure_installation
 #switch cat >> to cat > to create a file instead of append
 # create cron job service files
