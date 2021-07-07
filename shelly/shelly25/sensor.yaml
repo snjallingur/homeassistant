@@ -1,0 +1,12 @@
+# Shelly25 garage
+# gangway floor light and outdoor floor light
+- platform: mqtt
+  name: "Power switch 1"
+  state_topic: "shellies/shellyswitch25-xxxxxxxxxxxx/relay/0/power"
+- platform: mqtt
+  name: "Power switch 1"
+  state_topic: "shellies/shellyswitch25-xxxxxxxxxxxx/relay/1/power"
+- platform: mqtt
+  name: "Shelly25 temperature status"
+  state_topic: "shellies/shellyswitch25-xxxxxxxxxxxx/temperature_status"
+  
