@@ -1,0 +1,24 @@
+# Shelly25
+# IP: http://192.168.xxx.xxx
+- platform: mqtt
+  name: "Switch/Light 1"
+  state_topic: "shellies/shellyswitch25-xxxxxxxxxxxx/relay/0"
+  command_topic: "shellies/shellyswitch25-xxxxxxxxxxxx/relay/0/command"
+  payload_on: "on"
+  payload_off: "off"
+  state_on: "on"
+  state_off: "off"
+  optimistic: false
+  qos: 1
+  retain: false
+- platform: mqtt
+  name: "Switch/Light 1""
+  state_topic: "shellies/shellyswitch25-xxxxxxxxxxxx/relay/1"
+  command_topic: "shellies/shellyswitch25-xxxxxxxxxxxx/relay/1/command"
+  payload_on: "on"
+  payload_off: "off"
+  state_on: "on"
+  state_off: "off"
+  optimistic: false
+  qos: 1
+  retain: false
