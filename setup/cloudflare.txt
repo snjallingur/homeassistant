@@ -2,5 +2,5 @@ tunnel: snjallingur
 hostname: snjallingur.snjallingur.is
 url: http://snjallingur:8123
 logfile: /var/log/cloudflared.log
-#credentials-file: /home/pi/.cloudflared/cert.pem
-origincert: /home/pi/.cloudflared/cert.pem
+credentials-file: /home/hoomeassistant/tunnel.json
+origincert: /home/homeassistant/tunnel.json
