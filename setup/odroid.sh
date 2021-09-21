@@ -1,3 +1,5 @@
+#sudo useradd -m -s $(which bash) -G sudo snjallingur
+#passwd snjallingur
 sudo apt-get update
 sudo apt-get upgrade
 sudo apt-get -y install python-pycurl python-pycurl-dbg python-dev python-gobject python-gobject-2 git libdbus-1-dev libdbus-glib-1-dev build-essential libssl-dev libffi-dev python-dev
@@ -9,9 +11,9 @@ sudo apt-get -y install libavahi-compat-libdnssd-dev ffmpeg libmosquitto-dev
 sudo apt-get -y install pkg-config libavformat-dev libavcodec-dev libavdevice-dev libavutil-dev libswscale-dev libavresample-dev libavfilter-dev 
 sudo apt-get -y install libasound2-dev dh-autoreconf libortp-dev pulseaudio-module-bluetooth bluez bluetooth bluez-tools libbluetooth-dev libusb-dev libglib2.0-dev libudev-dev libical-dev libreadline-dev libsbc1 libsbc-dev libomxil-bellagio-dev
 sudo apt-get -y install mosquitto mosquitto-clients
-sudo apt-get -y install samba samba-common-bin netatalk
+#sudo apt-get -y install samba samba-common-bin netatalk
 sudo apt-get -y install -y python3 python3-dev python3-pip odroid-wiringpi libwiringpi-dev
-sudo systemctl enable smbd.service
+#sudo systemctl enable smbd.service
 
 #add for services
 #StandardOutput=append:/var/log/cloudflared.log
@@ -43,9 +45,9 @@ sudo cloudflared service install
 sudo systemctl enable cloudflared
 
 #Created tunnel odroid with id 0a59bdcf-8dcd-40a5-8425-587ef43bb236
-#{"AccountTag":"b0ac0ef3731ea4941b313c4996abc32b","TunnelSecret":"iZvrwta8RIeZ1KIdhGbNymLfOPo6ixj8deNsPKgi/X4=","TunnelID":"0a59bdcf-8dcd-40a5-8425-587ef43bb236","TunnelName":"odroid"}
+#{"AccountTag":"b0axxxxx","TunnelSecret":"iZvrwxxxxxxxxixj8deNsPKgi/X4=","TunnelID":"0a59bdcxxxxxxxxxxf43bb236","TunnelName":"odroid"}
 #cloudflared tunnel create odroid
-#cloudflared tunnel route dns 0a59bdcf-8dcd-40a5-8425-587ef43bb236 hub.snjallingur.is
+#cloudflared tunnel route dns 0xxxxxbdcf-8dxxxxxxxxx hub.snjallingur.is
 # Added CNAME hub.snjallingur.is
 
 sudo add-apt-repository -y ppa:hardkernel/ppa
@@ -53,6 +55,7 @@ sudo add-apt-repository -y ppa:hardkernel/ppa
 sudo groupadd i2c
 sudo useradd -rm homeassistant -G dialout,i2c
 sudo gpasswd -a homeassistant dialout
+#Path for ZHA is /dev/ttyS1
 
 
 
@@ -61,6 +64,8 @@ sudo mysql -u root -p
 #Create Database Homeassistant;
 #CREATE USER 'homeassistant' IDENTIFIED BY 'snjallingur';
 #use mysql;
+#FLUSH PRIVILEGES;
+#ALTER USER  'root'@'localhost' IDENTIFIED BY 'the-new-password';
 #GRANT ALL PRIVILEGES ON Homeassistant.* TO 'homeassistant'@'%' IDENTIFIED BY 'snjallingur';
 #GRANT ALL PRIVILEGES ON Homeassistant.* TO 'homeassistant'@'localhost' IDENTIFIED BY 'snjallingur';
 #FLUSH PRIVILEGES;
@@ -89,43 +94,54 @@ wget https://nodejs.org/dist/v15.14.0/node-v15.14.0-linux-arm64.tar.xz
 tar -xf node-v15.14.0-linux-arm64.tar.xz
 cd node-v15.14.0-linux-arm64
 sudo cp -R * /usr/local/
+cd ..
 #install Code Server
 curl -fsSL https://code-server.dev/install.sh | sh
 sudo systemctl enable --now code-server@homeassistant
+#start the code-server manually 
+#sudo service code-server@homeassistant start
+#amend /home/homeassistant/.config/code-server/config.yml
+#bind-addr: 0.0.0.0:8080
+#auth: password
+#password: snjallingur             
+#cert: false
 
-sudo adduser snjallingur
 
 #act as Homeassistant user
 sudo -u homeassistant -H -s
 cd /home/homeassistant
 #install pyenv
-curl https://pyenv.run | bash
+e
 cat >> /home/homeassistant/.bashrc <<'EOF'
 export PATH="$HOME/.pyenv/bin:$PATH"
-eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 EOF
 source /home/homeassistant/.bashrc
-pyenv install -v 3.8.7
-pyenv global 3.8.7
+pyenv install -v 3.8.10
+inst
 python3.8 -m pip install -U --user pip Odroid.GPIO
-python3.8 -m pip install wheel setuptools 
-python3.8 -m pip install BeautifulSoup4 lxml bs4 requests paho-mqtt pypi DateTime
-pip install google-cloud google-cloud-storage pycurl mysql-connector-python numpy imutils pymysql mysql
+python3.8 -m pip install wheel setuptools BeautifulSoup4 lxml bs4 requests paho-mqtt pypi DateTime 
+/home/homeassistant/.pyenv/versions/3.8.10/bin/python3.8 -m pip install google-cloud google-cloud-storage pycurl mysql-connector-python numpy imutils pymysql mysql gsutil
+/home/homeassistant/.pyenv/versions/3.8.10/bin/gsutil config -e
+
+#/home/homeassistant/.pyenv/versions/3.8.10/bin/gsutil -m rsync -r -x ".*\.db|.*\.jpg|.*\.log" /home/homeassistant/.homeassistant gs://snjallingur_hub/homeassistant
+#Restore
+#/home/homeassistant/.pyenv/versions/3.8.10/bin/gsutil -m rsync -r -x ".*\.db|.*\.jpg|.*\.log" gs://snjallingur_hub/homeassistant /home/homeassistant/.homeassistant 
 #create acount key file through console and downlaod it from there
-gcloud iam service-accounts keys create google_service_account.json --iam-account=snjallingurhub@snjallingur-313312.iam.gserviceaccount.com
-/home/homeassistant/.pyenv/versions/3.8.7/bin/gsutil config -e
+#gcloud iam service-accounts keys create google_service_account.json --iam-account=snjallingurhub@snjallingur-313312.iam.gserviceaccount.com
+
 
 #install Homeassistant
 #sudo -u homeassistant -H -s
+mkdir /home/homeassistant/Videos
 cd /srv/homeassistant
 /home/homeassistant/.pyenv/shims/python3.8 -m venv .
 #python3.8 -m venv .
 source /srv/homeassistant/bin/activate
-/home/homeassistant/.local/bin/pip3.8 install wheel
-/home/homeassistant/.local/bin/pip3.8 install requests
-pip install aiohttp
-pip install mysqlclient
-pip install homeassistant==2021.8.8
+pip3.8 install wheel requests
+pip3.8 install install aiohttp mysqlclient
+pip3.8 install homeassistant==2021.8.8
 #install HACS
 wget -q -O - https://install.hacs.xyz | bash -
+
+
