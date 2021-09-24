@@ -14,6 +14,7 @@ sudo apt-get -y install mosquitto mosquitto-clients
 #sudo apt-get -y install samba samba-common-bin netatalk
 sudo apt-get -y install -y python3 python3-dev python3-pip odroid-wiringpi libwiringpi-dev
 #sudo systemctl enable smbd.service
+sudo systemctl disable apache2
 
 #add for services
 #StandardOutput=append:/var/log/cloudflared.log
@@ -87,7 +88,8 @@ sudo systemctl enable home-assistant@homeassistant
 #sudo journalctl -f -u home-assistant@homeassistant
 #sudo journalctl -f -u home-assistant@homeassistant | grep -i 'error'
 #sudo systemctl start home-assistant@homeassistant
-
+sudo systemctl enable --now code-server@homeassistant
+sudo systemctl --system daemon-reload
 
 #Install NodeJS
 wget https://nodejs.org/dist/v15.14.0/node-v15.14.0-linux-arm64.tar.xz
@@ -111,16 +113,18 @@ sudo systemctl enable --now code-server@homeassistant
 sudo -u homeassistant -H -s
 cd /home/homeassistant
 #install pyenv
-e
+curl https://pyenv.run | bash
 cat >> /home/homeassistant/.bashrc <<'EOF'
 export PATH="$HOME/.pyenv/bin:$PATH"
 eval "$(pyenv virtualenv-init -)"
 EOF
 source /home/homeassistant/.bashrc
 pyenv install -v 3.8.10
-inst
-python3.8 -m pip install -U --user pip Odroid.GPIO
-python3.8 -m pip install wheel setuptools BeautifulSoup4 lxml bs4 requests paho-mqtt pypi DateTime 
+pyenv global 3.8.10
+#pip install BeautifulSoup4 lxml bs4 requests paho-mqtt pypi DateTime
+#pip install google-cloud google-cloud-storage pycurl mysql-connector-python numpy imutils pymysql mysql
+/home/homeassistant/.pyenv/versions/3.8.10/bin/python3.8 -m pip install -U --user pip Odroid.GPIO
+/home/homeassistant/.pyenv/versions/3.8.10/bin/python3.8 -m pip install wheel setuptools BeautifulSoup4 lxml bs4 requests paho-mqtt pypi DateTime 
 /home/homeassistant/.pyenv/versions/3.8.10/bin/python3.8 -m pip install google-cloud google-cloud-storage pycurl mysql-connector-python numpy imutils pymysql mysql gsutil
 /home/homeassistant/.pyenv/versions/3.8.10/bin/gsutil config -e
 
