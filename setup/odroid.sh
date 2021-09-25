@@ -148,4 +148,12 @@ pip3.8 install homeassistant==2021.8.8
 #install HACS
 wget -q -O - https://install.hacs.xyz | bash -
 
+#setup of WiFi
+#instructions: https://wiki.odroid.com/troubleshooting/minimal_image_wifi_setup_nmcli
+#nmcli device
+#nmcli radio wifi on
+#nmcli device wifi list
+#sudo nmcli device wifi connect "SSID" password "WiFiPassword"
+#Device 'wlan0' successfully activated with '47232814-f545-48eb-a325-0abb94427f0a'
+#
 
