@@ -6,7 +6,7 @@ detectors:
   coral:
     type: cpu
 mqtt:
-  host: skogarflot26
+  host: yourtmqttbroker
   topic_prefix: frigate
   client_id: frigate
 cameras:
