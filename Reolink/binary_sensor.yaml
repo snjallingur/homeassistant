@@ -1,0 +1,7 @@
+# Motion detection for Reolink webcam
+- platform: rest
+  resource: http://192.168.xxx.xxx/api.cgi?cmd=GetMdState&user=snjallingur&password=xxxxxx
+  name: Motion_Webcam
+  scan_interval: 10
+  value_template: "{{ value_json[0].value.state }}"
+  device_class: motion
