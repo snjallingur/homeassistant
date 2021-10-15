@@ -1,37 +1,44 @@
 #needs mini Media PLayer install through HACS or:
 #https://github.com/kalkih/mini-media-player
 #more available streams can be found on spilarinn.is
-source: icon
-type: 'custom:mini-media-player'
-artwork: cover
-group: true
-columns: 4
 entity: media_player.xxxx
+source: icon
+artwork: cover-fit
+info: short
+scale: '1.5'
+name: Útvarp
+volume_stateless: false
+group: true
+max_volume: '15'
+type: custom:mini-media-player
+columns: 2
 hide:
   volume: false
 shortcuts:
   buttons:
-    - id: 'http://wms-1.visir.is/radio/orbBylgjan/playlist.m3u8'
-      image: 'http://www.spilarinn.is/uploads/1590105560905.png'
+    - id: http://ice-11.spilarinn.is/tbylgjan
+      name: Bylgjan
+      image: https://bakendi.spilarinn.is/api/files/10058
       type: music
-    - id: 'http://stream3.radio.is:443/zlettbylgjan'
-      image: 'http://www.spilarinn.is/uploads/1487000031433.png'
+    - id: http://ice-11.spilarinn.is/tlettbylgjan
+      image: https://bakendi.spilarinn.is/api/files/95
+      name: Léttbylgjan
       type: music
-    - id: 'http://netradio.ruv.is/ras1.mp3'
-      image: 'http://www.spilarinn.is/uploads/1486993809091.png'
+    - id: http://ice-11.spilarinn.is/xruv1
+      name: Rás 1
+      image: https://bakendi.spilarinn.is/api/files/83
       type: music
-    - id: 'http://netradio.ruv.is/ras2.mp3'
-      image: 'http://www.spilarinn.is/uploads/1486993745455.png'
+    - id: http://ice-11.spilarinn.is/xruv2
+      image: https://bakendi.spilarinn.is/api/files/75
+      name: Rás 2
       type: music
-    - id: 'http://stream3.radio.is:443/tgullbylgjan'
-      image: 'http://www.spilarinn.is/uploads/1487000023233.png'
+    - id: http://ice-11.spilarinn.is/tfmx
+      image: https://bakendi.spilarinn.is/api/files/10053
+      name: Íslenska Bylgjan
       type: music
-    - id: 'http://stream3.radio.is:443/tfmx'
-      image: 'http://www.spilarinn.is/uploads/1590104359330.png'
+    - id: http://ice-11.spilarinn.is/tgullbylgjan
+      image: https://bakendi.spilarinn.is/api/files/79
+      name: Gullbylgjan
       type: music
-    - id: 'http://stream3.radio.is:443/80flashback'
-      image: 'http://www.spilarinn.is/uploads/1486999288073.png'
-      type: music
-    - id: 'http://stream3.radio.is:443/kissfm'
-      image: 'http://www.spilarinn.is/uploads/1486999482602.png'
-      type: music
+
+
