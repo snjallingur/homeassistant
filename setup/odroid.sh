@@ -1,5 +1,6 @@
 #sudo useradd -m -s $(which bash) -G sudo snjallingur
 #passwd snjallingur
+sudo add-apt-repository -y ppa:hardkernel/ppa
 sudo apt-get update
 sudo apt-get upgrade
 sudo apt-get -y install python-pycurl python-pycurl-dbg python-dev python-gobject python-gobject-2 git libdbus-1-dev libdbus-glib-1-dev build-essential libssl-dev libffi-dev python-dev
@@ -27,7 +28,7 @@ sudo apt-get -y install make build-essential libssl-dev zlib1g-dev libbz2-dev li
 sudo apt-get -y install apt-transport-https ca-certificates curl gnupg lsb-release
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
 echo "deb [arch=arm64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-sudo apt update
+sudo apt-get update
 sudo apt-get -y install docker-ce docker-ce-cli containerd.io
 
 #Install doods 
@@ -41,7 +42,7 @@ sudo mv cloudflared /usr/local/bin
 sudo chmod +x /usr/local/bin/cloudflared
 #cloudflared -v
 sudo mkdir /etc/cloudflared
-#sudo bash -c 'cat  cloudflare.txt > /etc/cloudflared/config.yml'
+sudo bash -c 'cat  cloudflare.txt > /etc/cloudflared/config.yml'
 sudo cloudflared service install
 sudo systemctl enable cloudflared
 
@@ -51,17 +52,13 @@ sudo systemctl enable cloudflared
 #cloudflared tunnel route dns 0xxxxxbdcf-8dxxxxxxxxx hub.snjallingur.is
 # Added CNAME hub.snjallingur.is
 
-sudo add-apt-repository -y ppa:hardkernel/ppa
-
 sudo groupadd i2c
 sudo useradd -rm homeassistant -G dialout,i2c
 sudo gpasswd -a homeassistant dialout
 #Path for ZHA is /dev/ttyS1
 
-
-
 #mysql setup
-sudo mysql -u root -p
+#sudo mysql -u root -p
 #Create Database Homeassistant;
 #CREATE USER 'homeassistant' IDENTIFIED BY 'snjallingur';
 #use mysql;
