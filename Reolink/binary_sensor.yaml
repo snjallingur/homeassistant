@@ -1,4 +1,5 @@
 # Motion detection for Reolink webcam
+#The Motion API only works when connected to LAN
 - platform: rest
   resource: http://192.168.xxx.xxx/api.cgi?cmd=GetMdState&user=snjallingur&password=xxxxxx
   name: Motion_Webcam
