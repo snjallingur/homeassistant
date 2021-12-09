@@ -1,12 +1,37 @@
+#sudo useradd -m -s $(which bash) -G sudo snjallingur
+#passwd snjallingur
+sudo add-apt-repository -y ppa:hardkernel/ppa
+sudo apt-get update
+sudo apt-get upgrade
+
+sudo apt-get install jq wget curl avahi-daemon udisks2 libglib2.0-bin network-manager dbus apparmor -y
+sudo apt-get install odroid-wiringpi libwiringpi-dev
+sudo groupadd i2cc
+sudo gpasswd -a snjallingur dialout
+sudo apt-get -y install apt-transport-https ca-certificates curl gnupg lsb-release
+sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python-openssl git
+sudo apt --fix-broken install
+sudo reboot
+#Docker installation
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
+sudo usermod -aG docker snjallingur
+
+#Installing Hass OS agent
+wget https://github.com/home-assistant/os-agent/releases/download/1.2.2/os-agent_1.2.2_linux_aarch64.deb
+sudo dpkg -i os-agent_1.2.2_linux_aarch64.deb
+#check output of
+gdbus introspect --system --dest io.hass.os --object-path /io/hass/os
+
 #Installing pyenv guidelines
 #https://www.liquidweb.com/kb/how-to-install-pyenv-on-ubuntu-18-04/
 
 #Installing Supervisor guidelines
 #https://peyanski.com/how-to-install-home-assistant-supervised-official-way/
+wget https://github.com/home-assistant/supervised-installer/releases/latest/download/homeassistant-supervised.deb
+sudo dpkg -i homeassistant-supervised.deb
 
-#Installing Hass OS agent
-wget https://github.com/home-assistant/os-agent/releases/download/1.2.2/os-agent_1.2.2_linux_aarch64.deb
-sudo dpkg -i os-agent_1.2.2_linux_aarch64.deb
+
 
 
 
