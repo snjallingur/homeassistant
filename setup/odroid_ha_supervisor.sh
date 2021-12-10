@@ -52,6 +52,11 @@ if z=$(curl -s 'https://install.zerotier.com/' | gpg); then echo "$z" | sudo bas
 #credentials-file: /home/homeassistant/.cloudflared/tunnel.json
 #origincert: /home/homeassistant/.cloudflared/tunnel.json
 
+#flashing RaspBee2 Zigbee dongle
+#Install falshing tool
+#https://github.com/dresden-elektronik/gcfflasher
+#https://github.com/dresden-elektronik/deconz-rest-plugin/wiki/Update-deCONZ-manually#update-in-raspbian
+#./GCFFlasher -d /dev/ttyS1 -t 60 -f deCONZ_RaspBeeII_0x26720700.bin.GCF
 
 #Add to /etc/crontab
 #30 4 1 * * root    sh /usr/share/hassio/homeassistant/snjallingur_scripts/homeassistant_upgrade.sh
