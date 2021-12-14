@@ -113,6 +113,8 @@ cd /home/homeassistant
 curl https://pyenv.run | bash
 cat >> /home/homeassistant/.bashrc <<'EOF'
 export PATH="$HOME/.pyenv/bin:$PATH"
+export PATH="$HOME/.pyenv/shims:$PATH"
+eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 EOF
 source /home/homeassistant/.bashrc
