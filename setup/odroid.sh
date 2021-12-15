@@ -7,7 +7,6 @@ sudo apt-get -y install python-pycurl python-pycurl-dbg python-dev python-gobjec
 sudo apt-get -y install libssl-dev libxml2-dev libxslt-dev libcurl4-openssl-dev
 sudo apt-get -y install libjpeg-dev libtiff5-dev libpng-dev libavcodec-dev libavformat-dev libswscale-dev libv4l-dev libxvidcore-dev libx264-dev python3-opencv libatlas-base-dev
 sudo apt-get -y install libxml2-utils libssl-doc libcurl4-gnutls-dev 
-sudo apt-get -y install apache2 php libapache2-mod-php php-mysql php-curl -y
 sudo apt-get -y install libavahi-compat-libdnssd-dev ffmpeg libmosquitto-dev
 sudo apt-get -y install pkg-config libavformat-dev libavcodec-dev libavdevice-dev libavutil-dev libswscale-dev libavresample-dev libavfilter-dev 
 sudo apt-get -y install libasound2-dev dh-autoreconf libortp-dev pulseaudio-module-bluetooth bluez bluetooth bluez-tools libbluetooth-dev libusb-dev libglib2.0-dev libudev-dev libical-dev libreadline-dev libsbc1 libsbc-dev libomxil-bellagio-dev
@@ -15,7 +14,6 @@ sudo apt-get -y install mosquitto mosquitto-clients
 #sudo apt-get -y install samba samba-common-bin netatalk
 sudo apt-get -y install -y python3 python3-dev python3-pip odroid-wiringpi libwiringpi-dev
 #sudo systemctl enable smbd.service
-sudo systemctl disable apache2
 
 #add for services
 #StandardOutput=append:/var/log/cloudflared.log
@@ -118,14 +116,14 @@ eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 EOF
 source /home/homeassistant/.bashrc
-pyenv install -v 3.8.10
-pyenv global 3.8.10
+pyenv install -v 3.9.9
+pyenv global 3.9.9
 #pip install BeautifulSoup4 lxml bs4 requests paho-mqtt pypi DateTime
 #pip install google-cloud google-cloud-storage pycurl mysql-connector-python numpy imutils pymysql mysql
-/home/homeassistant/.pyenv/versions/3.8.10/bin/python3.8 -m pip install -U --user pip Odroid.GPIO
-/home/homeassistant/.pyenv/versions/3.8.10/bin/python3.8 -m pip install wheel setuptools BeautifulSoup4 lxml bs4 requests paho-mqtt pypi DateTime 
-/home/homeassistant/.pyenv/versions/3.8.10/bin/python3.8 -m pip install google-cloud google-cloud-storage pycurl mysql-connector-python numpy imutils pymysql mysql gsutil
-/home/homeassistant/.pyenv/versions/3.8.10/bin/gsutil config -e
+/home/homeassistant/.pyenv/shims/python -m pip install -U --user pip Odroid.GPIO
+/home/homeassistant/.pyenv/shims/python -m pip install wheel setuptools BeautifulSoup4 lxml bs4 requests paho-mqtt pypi DateTime 
+/home/homeassistant/.pyenv/shims/python -m pip install google-cloud google-cloud-storage pycurl mysql-connector-python numpy imutils pymysql mysql gsutil
+/home/homeassistant/.pyenv/versions/3.9.9/bin/gsutil config -e
 
 #/home/homeassistant/.pyenv/versions/3.8.10/bin/gsutil -m rsync -r -x ".*\.db|.*\.jpg|.*\.log" /home/homeassistant/.homeassistant gs://snjallingur_hub/homeassistant
 #Restore
@@ -141,9 +139,9 @@ cd /srv/homeassistant
 /home/homeassistant/.pyenv/shims/python3.8 -m venv .
 #python3.8 -m venv .
 source /srv/homeassistant/bin/activate
-pip3.8 install wheel requests
-pip3.8 install install aiohttp mysqlclient
-pip3.8 install homeassistant==2021.8.8
+pip install wheel requests
+pip install install aiohttp mysqlclient
+pip install homeassistant==2021.8.8
 #install HACS
 wget -q -O - https://install.hacs.xyz | bash -
 
