@@ -52,6 +52,8 @@ tar -xf node-v14.16.0-linux-armv7l.tar.xz
 cd node-v14.16.0-linux-armv7l
 sudo cp -R * /usr/local/
 cd ..
+#install dlib
+#https://lindevs.com/install-precompiled-dlib-on-raspberry-pi/
 #act as Homeassistant user
 sudo -u homeassistant -H -s
 cd /home/homeassistant
@@ -75,10 +77,12 @@ pip install google-cloud google-cloud-storage pycurl mysql-connector-python nump
 cd /srv/homeassistant
 python3.8 -m venv .
 source /srv/homeassistant/bin/activate
-pip3.8 install wheel setuptools mysql-connector-python numpy imutils pymysql mysql av
+pip3.8 install wheel setuptools mysql-connector-python numpy imutils pymysql mysql av face-recognition
 pip3.8 install homeassistant==2021.5.4
 #install HACS
 wget -q -O - https://install.hacs.xyz | bash -
+
+
 
 
 
