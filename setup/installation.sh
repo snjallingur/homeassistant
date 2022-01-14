@@ -11,7 +11,7 @@ sudo apt-get install -y libasound2-dev dh-autoreconf libortp-dev pulseaudio-modu
 sudo apt-get install -y libxkbfile-dev libsecret-1-dev libjpeg-dev zlib1g-dev
 sudo apt-get install -y mosquitto mosquitto-clients
 sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python-openssl
-sudo apt-get install -y golang cmake python-dev python-setuptools
+sudo apt-get install -y golang cmake python-dev python-setuptools libsqlite3-dev
 #install docker
 sudo apt-get -y install apt-transport-https ca-certificates curl gnupg lsb-release
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
@@ -41,6 +41,16 @@ sudo bash -c 'cat  code-server_service.txt > /etc/systemd/system/code-server@hom
 # mysql
 sudo apt-get install -y libmariadb-dev-compat libmariadb-dev mariadb-server
 sudo mysql_secure_installation
+#mysql setup
+#sudo mysql -u root -p
+#Create Database Homeassistant;
+#CREATE USER 'homeassistant' IDENTIFIED BY 'snjallingur';
+#use mysql;
+#FLUSH PRIVILEGES;
+#ALTER USER  'root'@'localhost' IDENTIFIED BY 'the-new-password';
+#GRANT ALL PRIVILEGES ON Homeassistant.* TO 'homeassistant'@'%' IDENTIFIED BY 'snjallingur';
+#GRANT ALL PRIVILEGES ON Homeassistant.* TO 'homeassistant'@'localhost' IDENTIFIED BY 'snjallingur';
+#FLUSH PRIVILEGES;
 #switch cat >> to cat > to create a file instead of append
 # create cron job service files
 sudo bash -c 'cat  cron.txt >> /etc/crontab'
@@ -54,11 +64,7 @@ sudo systemctl enable --now code-server@homeassistant
 sudo systemctl enable home-assistant@homeassistant
 sudo systemctl --system daemon-reload
 #install nodejs
-wget https://nodejs.org/dist/v14.16.0/node-v14.16.0-linux-armv7l.tar.xz
-tar -xf node-v14.16.0-linux-armv7l.tar.xz
-cd node-v14.16.0-linux-armv7l
-sudo cp -R * /usr/local/
-cd ..
+
 #install dlib
 #https://lindevs.com/install-precompiled-dlib-on-raspberry-pi/
 #act as Homeassistant user
@@ -83,8 +89,9 @@ pip install google-cloud google-cloud-storage pycurl mysql-connector-python nump
 cd /srv/homeassistant
 python -m venv .
 source /srv/homeassistant/bin/activate
-pip install wheel setuptools mysql-connector-python imutils pymysql mysql RPi.GPIO==0.7.1a4
-face-recognition
+pip install wheel setuptools mysql-connector-python imutils pymysql mysql RPi.GPIO==0.7.1a4 zha-quirks zigate
+pip install av --no-binary av
+#pip install face-recognition
 pip install homeassistant==2021.12.8
 #install HACS
 wget -q -O - https://install.hacs.xyz | bash -
