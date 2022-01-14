@@ -11,7 +11,7 @@ sudo apt-get install -y libasound2-dev dh-autoreconf libortp-dev pulseaudio-modu
 sudo apt-get install -y libxkbfile-dev libsecret-1-dev libjpeg-dev zlib1g-dev
 sudo apt-get install -y mosquitto mosquitto-clients
 sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python-openssl
-sudo apt-get install -y golang
+sudo apt-get install -y golang cmake python-dev python-setuptools
 curl -fsSL https://code-server.dev/install.sh | sh
 #for Linux
 #wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-arm64
@@ -60,25 +60,25 @@ cd /home/homeassistant
 #install pyenv
 curl https://pyenv.run | bash
 cat >> /home/homeassistant/.bashrc <<'EOF'
+export PATH="$HOME/.pyenv/shims:$PATH"
 export PATH="$HOME/.pyenv/bin:$PATH"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 EOF
 source /home/homeassistant/.bashrc
-pyenv install -v 3.8.7
-pyenv global 3.8.7
+pyenv install -v 3.10.1
+pyenv global 3.10.1
 #install Rust for gsutil
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-source $HOME/.cargo/env
 #install Python modules
 pip install BeautifulSoup4 lxml bs4 requests paho-mqtt pypi DateTime
 pip install google-cloud google-cloud-storage pycurl mysql-connector-python numpy imutils pymysql mysql
 #install Homeassistant
 cd /srv/homeassistant
-python3.8 -m venv .
+python -m venv .
 source /srv/homeassistant/bin/activate
-pip3.8 install wheel setuptools mysql-connector-python numpy imutils pymysql mysql av face-recognition
-pip3.8 install homeassistant==2021.5.4
+pip install wheel setuptools mysql-connector-python imutils pymysql mysql RPi.GPIO==0.7.1a4
+face-recognition
+pip install homeassistant==2021.12.8
 #install HACS
 wget -q -O - https://install.hacs.xyz | bash -
 
