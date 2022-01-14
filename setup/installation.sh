@@ -11,7 +11,7 @@ sudo apt-get install -y libasound2-dev dh-autoreconf libortp-dev pulseaudio-modu
 sudo apt-get install -y libxkbfile-dev libsecret-1-dev libjpeg-dev zlib1g-dev
 sudo apt-get install -y mosquitto mosquitto-clients
 sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python-openssl
-sudo apt-get install -y golang cmake python-dev python-setuptools libsqlite3-dev
+sudo apt-get install -y golang cmake python-dev python-setuptools libsqlite3-dev libbz2-dev
 #install docker
 sudo apt-get -y install apt-transport-https ca-certificates curl gnupg lsb-release
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
