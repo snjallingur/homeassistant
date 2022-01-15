@@ -89,7 +89,7 @@ pip install google-cloud google-cloud-storage pycurl mysql-connector-python nump
 cd /srv/homeassistant
 python -m venv .
 source /srv/homeassistant/bin/activate
-pip install wheel setuptools mysql-connector-python imutils pymysql mysql RPi.GPIO==0.7.1a4 zha-quirks zigate
+pip install wheel setuptools mysql-connector-python imutils pymysql mysql RPi.GPIO==0.7.1a4 zha-quirks zigate grpcio-tools 
 pip install av --no-binary av
 #pip install face-recognition
 pip install homeassistant==2021.12.8
