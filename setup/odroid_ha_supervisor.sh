@@ -37,6 +37,10 @@ curl -s 'https://raw.githubusercontent.com/zerotier/ZeroTierOne/master/doc/conta
 if z=$(curl -s 'https://install.zerotier.com/' | gpg); then echo "$z" | sudo bash; fi
 #join Zerotier network
 #zerotier-cli join xxxxxxxxx
+#remove a zerotier connection
+#sudo service zerotier-one stop
+#sudo rm /var/lib/zerotier-one/identity.*
+#sudo service zerotier-one start
 
 #CLoudflared
 #cloudflared tunnel route dns xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxx demo.snjallingur.is
@@ -72,6 +76,6 @@ cd ..
 
 #Add to /etc/crontab
 30 4 1 * * root    sh /usr/share/hassio/homeassistant/snjallingur_scripts/homeassistant_upgrade.sh
-*/10 * * * * snjallingur bash --login -c "/home/snjallingur/.pyenv/shims/python3.9 /usr/share/hassio/homeassistant/snjallingur_scripts/vegagerdin.py" >> /home/snjallingur/cronjob.log 2>&1
-*/15 * * * * snjallingur bash --login -c "/home/snjallingur/.pyenv/shims/python3.9 /usr/share/hassio/homeassistant/snjallingur_scripts/vedurspa.py" >> /home/snjallingur/cronjob.log 2>&1
-*/30 * * * * snjallingur bash --login -c "/home/snjallingur/.pyenv/shims/python3.9 /usr/share/hassio/homeassistant/snjallingur_scripts/nordurljosaspa.py" >> /home/snjallingur/cronjob.log 2>&1
+*/10 * * * * snjallingur bash --login -c "/home/snjallingur/.pyenv/shims/python3 /usr/share/hassio/homeassistant/snjallingur_scripts/vegagerdin.py" >> /home/snjallingur/cronjob.log 2>&1
+*/15 * * * * snjallingur bash --login -c "/home/snjallingur/.pyenv/shims/python3 /usr/share/hassio/homeassistant/snjallingur_scripts/vedurspa.py" >> /home/snjallingur/cronjob.log 2>&1
+*/30 * * * * snjallingur bash --login -c "/home/snjallingur/.pyenv/shims/python3 /usr/share/hassio/homeassistant/snjallingur_scripts/nordurljosaspa.py" >> /home/snjallingur/cronjob.log 2>&1
