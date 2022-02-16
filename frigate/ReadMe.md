@@ -5,11 +5,11 @@ for RPI4
 docker pull blakeblackshear/frigate:0.10.0-rc1-aarch64 
 ```
 or 
-'''
+```
 docker pull blakeblackshear/frigate:0.9.4-aarch64
-'''
+```
 ## Run Docker container:
-'''
+```
 docker run -d \
   --name frigate \
   --restart=unless-stopped \
@@ -21,8 +21,9 @@ docker run -d \
   -p 5050:5000 \
   -p 1935:1935 \
   blakeblackshear/frigate:0.10.0-rc1-aarch64
-'''
-'''
+```
+or
+```
 docker run -d \
   --name frigate-0.9.4 \
   --restart=unless-stopped \
@@ -34,8 +35,8 @@ docker run -d \
   -p 5050:5000 \
   -p 1935:1935 \
   blakeblackshear/frigate:0.9.4-aarch64
-'''
+```
 ## Debugging docker:
-'''
+```
 sudo docker logs --tail 50 --follow --timestamps frigate-0.9.4
-'''
+```
