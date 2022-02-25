@@ -9,3 +9,8 @@ docker run -d \
   -v /home/homeassistant/.homeassistant/deepstack:/datastore \
   -p 8088:5000 deepquestai/deepstack:arm64
 ```
+
+## Debugging docker:
+```
+docker logs --tail 50 --follow --timestamps deepstack
+```
