@@ -1,5 +1,11 @@
-##Docker installation 
+## Docker installation 
 
 RaspberryPi (arm64)
-
-docker run -e VISION-FACE=True -v localstorage:/datastore -p 80:5000 deepquestai/deepstack:arm64
+```
+docker run -d \
+  --name deepstack \
+  --restart=unless-stopped \
+  -e VISION-FACE=True \
+  -v /home/homeassistant/.homeassistant/deepstack:/datastore \
+  -p 8088:5000 deepquestai/deepstack:arm64
+```
