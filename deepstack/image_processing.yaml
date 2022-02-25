@@ -1,0 +1,46 @@
+#Face detection
+#https://github.com/robmarkcole/HASS-Deepstack-face
+- platform: deepstack_face
+  ip_address: localhost
+  port: 8088
+  scan_interval: 3600
+  #api_key: mysecretkey
+  timeout: 5
+  detect_only: False
+  save_file_folder: /home/homeassistant/Videos/FaceDetection
+  save_timestamped_file: True
+  save_faces: True
+  save_faces_folder: /home/homeassistant/Videos/FaceDetection/Faces
+  show_boxes: True
+  source:
+    - entity_id: camera.doorbell_ringing
+      name: doorbell_ringing_face_counter
+    - entity_id: camera.doorbell_snjallingur
+      name: doorbell_snjallingur
+#Object detection
+#https://github.com/robmarkcole/HASS-Deepstack-object
+#- platform: deepstack_object
+#  ip_address: localhost
+#  port: 8088
+#  scan_interval: 60
+#  api_key: mysecretkey
+#  timeout: 5
+#  detect_only: False
+#  save_file_folder: /home/homeassistant/Videos/Objects
+#  save_file_format: jpg
+# save_timestamped_file: True
+#  always_save_latest_file: True
+#  scale: 0.75
+#  targets:
+#    - target: person
+#    - target: vehicle
+#      confidence: 60
+#    - target: car
+#      confidence: 40
+#  source:
+#    - entity_id: camera.doorbell_latest
+#      name: doorbell_object_detection
+  # roi_x_min: 0.35
+  #roi_x_max: 0.8
+  #roi_y_min: 0.4
+  #roi_y_max: 0.8
