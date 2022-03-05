@@ -1,0 +1,33 @@
+frontend: true
+permit_join: true
+mqtt:
+  base_topic: zigbee2mqtt
+  server: mqtt://192.168.xxx.xxx
+  user: homeassistant
+  password: xxxxxx
+serial:
+  port: /dev/ttyACM0
+ota:
+  update_check_interval: 2880
+  ikea_ota_use_test_url: true
+homeassistant:
+  discovery_topic: homeassistant
+  status_topic: homeassistant/status
+  legacy_entity_attributes: true
+  legacy_triggers: true
+advanced:
+  log_level: debug
+  timestamp_format: YYYY-MM-DD HH:mm:ss
+  log_directory: data/log/%TIMESTAMP%
+  log_file: log.txt
+  log_rotation: true
+  log_output:
+    - console
+    - file
+  log_symlink_current: false
+  log_syslog:
+    host: localhost
+    path: /dev/log
+    pid: process.pid
+    facility: local0
+    localhost: localhost
