@@ -1,6 +1,6 @@
-tunnel: snjallingur
-hostname: snjallingur.snjallingur.is
-url: http://snjallingur:8123
+tunnel: xxxxxxxxxx-xxxxx-xxxx-xxxx-xxx
+hostname: homeassistant.snjallingur.is
+url: http://localhost:8123
 logfile: /var/log/cloudflared.log
-credentials-file: /home/hoomeassistant/tunnel.json
-origincert: /home/homeassistant/tunnel.json
+credentials-file: /home/snjallingur/tunnel.json
+origincert: /home/snjallingur/tunnel.json
