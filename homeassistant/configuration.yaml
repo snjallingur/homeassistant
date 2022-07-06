@@ -1,0 +1,133 @@
+# for customizing domains, entities
+homeassistant:
+  customize: !include customize.yaml
+  customize_domain: !include customize_domain.yaml
+  #whitelist external directories
+  allowlist_external_dirs:
+    - media/Videos
+  # Media directories
+  # https://www.home-assistant.io/more-info/local-media/setup-media/
+  media_dirs:
+    #media_videos: /media/videos
+    #homeassistant_videos: /mnt/snjallingur/Videos
+    media_files: media/Videos
+#http configuration
+http:
+  #server_port: 12345
+  #ssl_certificate: /etc/letsencrypt/live/hass.example.com/fullchain.pem
+  #ssl_key: /etc/letsencrypt/live/hass.example.com/privkey.pem
+  #cors_allowed_origins:
+  #  - https://google.com
+  #  - https://www.home-assistant.io
+  use_x_forwarded_for: true
+  trusted_proxies:
+  #  - 10.0.0.200
+    - 192.168.132.0/24
+    #- 192.168.132.149
+    - 127.0.0.1
+    - ::1
+  #ip_ban_enabled: true
+  #login_attempts_threshold: 5
+
+
+# Configure a default setup of Home Assistant (frontend, api, etc)
+default_config:
+#
+#external panels from the left side bar
+#panel_iframe:
+#  code_server:
+#    title: "VS Code"
+#    url: "http://127.0.0.1:8090"
+#    icon: mdi:file-code-outline
+#  node_red:
+#    title: "Node Red"
+#    url: "http://127.0.0.1:1880"
+#    icon: mdi:sitemap
+# stream component
+# https://www.home-assistant.io/integrations/stream/
+stream:
+# ffmpeg: https://www.home-assistant.io/integrations/ffmpeg/
+# ffmpeg component
+ffmpeg:
+
+frontend:
+  # https://www.home-assistant.io/integrations/frontend/#defining-themes
+  themes: !include_dir_merge_named themes
+
+# makes sure to iew the logs from within the UI
+# this adds two services:  
+system_log:
+  max_entries: 40
+  fire_event: true
+  # this will enable system_log_event
+  # read more https://www.home-assistant.io/integrations/system_log/
+
+
+#set logging
+# log levels: critical, fatal, error,  warning, warn, info,  debug, notset 
+logger:
+  default: warn
+  logs:
+    #asyncio: debug
+    #homeassistant.components.zha: debug
+    homeassistant.components.webhook: debug
+    homeassistant.components.shell_command: debug
+    #homeassistant.components.command_line: debug
+    #zigpy: debug
+    #bellows: debug
+    #zigpy_xbee: debug
+    #zigpy_deconz: debug
+    #zigpy_zigate: debug
+
+# Text to speech
+tts:
+  - platform: google_translate
+  - platform: amazon_polly
+    aws_access_key_id: xxxxxxxx
+    aws_secret_access_key: xxxxxxxxxx
+    name: polly
+    region_name:
+    text_type:
+    voice: Dora
+    output_format: mp3
+    engine: standard
+
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+binary_sensor: !include binary_sensors.yaml
+sensor: !include sensors.yaml
+switch: !include switches.yaml
+shell_command: !include shell_commands.yaml
+google_assistant: !include google_assistant.yaml
+light: !include lights.yaml
+counter: !include counters.yaml
+camera: !include cameras.yaml
+cover: !include covers.yaml
+notify: !include notify.yaml
+image_processing: !include imageprocessing.yaml
+
+
+# database setup 
+recorder:
+  purge_keep_days: 7
+  db_url: mysql://<yourusername>:<yourpassword>@127.0.0.1/Homeassistant?charset=utf8
+  exclude:
+    domains:
+    #  - automation
+    #  - weblink
+      - updater
+    entities:
+      #- sun.sun # Don't record sun data
+      #- sensor.last_boot # Comes from 'systemmonitor' sensor platform
+      - media_player.xxxxx
+      - sensor.doorbell_processor_usage
+      - sensor.time_formatted  
+
+
+#Device tracker
+device_tracker:
+
+#setting the climate component
+climate:
