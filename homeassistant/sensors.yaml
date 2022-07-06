@@ -1,0 +1,438 @@
+# REST sensor for Shelly
+# Motion Sensor Garage
+#- platform: rest
+#  name: Motion sensor wifi strength
+#  resource: http://192.168.132.125/status
+#  value_template: '{{ value_json["wifi_sta"]["rssi"] }}'
+#  scan_interval: 7200
+  #icon_template: mdi:signal-variant
+
+# REST status sensor for Shelly1PM
+# Shelly1 PM heatpump
+#http://192.168.132.178/
+#- platform: rest
+#  name: "Heatpump garage"
+#  resource: http://192.168.132.178/status
+#  json_attributes:
+#    - wifi_sta.rssi
+#    - wifi_sta
+#    - temperature
+#    - overtemperature
+#  value_template: 'OK'
+#  scan_interval: 7200
+
+#
+#MQTT sesnor for HA version to update with Shell script
+- platform: mqtt
+  name: ha_version_latest
+  state_topic: "homeassistant/version/latest"
+
+# Mqtt sensor for Shelly i3
+#- platform: mqtt
+#  name: Shellyi3-0
+#  state_topic: "shellies/shellyix3-10521CF1CCF2/input_event/0"
+#  value_template: "{{ value_json['event'] }}"
+#  json_attributes_topic: "shellies/shellyix3-10521CF1CCF2/input_event/0"
+#  json_attributes_template: "{{ value_json | tojson }}"
+
+# Shelly25 garage
+# gangway floor light and outdoor floor light
+#- platform: mqtt
+#  name: Power light floor outdoor
+#  state_topic: "shellies/shellyswitch25-98F4ABF2C016/relay/0/power"
+#- platform: mqtt
+#  name: Power light floor indoor
+#  state_topic: "shellies/shellyswitch25-98F4ABF2C016/relay/1/power"
+
+
+# Shelly1pm Outdoorlights
+# ip: http://192.168.132.228
+#- platform: mqtt
+#  name: "Power light outside"
+#  state_topic: "shellies/shelly1pm-76DCC2/relay/0/power"
+# Shelly1pm Heatpump
+# ip: http://192.168.132.178
+# shellies/shelly1pm-B915D1
+#- platform: mqtt
+#  name: "Power Heatpump"
+#  state_topic: "shellies/shelly1pm-B915D1/relay/0/power"
+#  device_class: power
+#- platform: mqtt
+#  name: "Energy Heatpump"
+#  state_topic: "shellies/shelly1pm-B915D1/relay/0/energy"
+#  device_class: energy
+#- platform: mqtt
+#  name: "Device temperature Heatpump"
+#  state_topic: "shellies/shelly1pm-B915D1/temperature"
+#  device_class: temperature
+
+# 
+#ShellyDimmer Power Guest middle
+#IP: http://192.168.132.165/
+#- platform: mqtt
+#  name: "Power Dimmer Guest middle"
+#  state_topic: "shellies/shellydimmer-D0B2A4/light/0/power"
+# 
+#ShellyDimmer Power Guest window
+#IP:  
+#- platform: mqtt
+#  name: "Power Dimmer Guest window"
+#  state_topic: "shellies/shellydimmer-D0EA3E/light/0/power"
+
+# sensor to return day of the week
+# is only returning a valid value after a restart
+#- platform: template
+#  sensors:
+#    dayoftheweek:
+#      entity_id: sensor.date
+#      value_template: "{{ now().strftime('%A') }}"
+# Temperature sensor from Shelly 1
+#- platform: mqtt
+#  name: "temperature_floorheating_back"
+#  device_class: temperature
+#  state_topic: "shellies/shelly1pm-B915D1/ext_temperatures"
+#  unit_of_measurement: "\u00B0C"
+#  value_template: "{{ value_json['0']['tC'] }}"
+#  json_attributes_topic: "shellies/shelly1pm-B915D1/ext_temperatures"
+#  json_attributes_template: "{{ value_json['0'] | tojson }}"
+#- platform: mqtt
+#  name: "temperature_hottub_forward"
+#  device_class: temperature
+#  state_topic: "shellies/shelly1pm-B915D1/ext_temperatures"
+#  unit_of_measurement: "\u00B0C"
+#  value_template: "{{ value_json['1']['tC'] }}"
+#  json_attributes_topic: "shellies/shelly1pm-B915D1/ext_temperatures"
+#  json_attributes_template: "{{ value_json['1'] | tojson }}"
+#- platform: mqtt
+#  name: "temperature_floorheating_forward"
+#  device_class: temperature
+#  state_topic: "shellies/shelly1pm-B915D1/ext_temperatures"
+#  unit_of_measurement: "\u00B0C"
+#  value_template: "{{ value_json['2']['tC'] }}"
+#  json_attributes_topic: "shellies/shelly1pm-B915D1/ext_temperatures"
+#  json_attributes_template: "{{ value_json['2'] | tojson }}"
+
+#- platform: mqtt
+#  name: "Shelly1 Event"
+#  device_class: temperature
+#  state_topic: "shellies/shelly1-E098069682A0/input_event/0"
+#  unit_of_measurement: "\u00B0C"
+#  value_template: "{{ value_json['0']['event'] }}"
+#  json_attributes_topic: "shellies/shelly1-E098069682A0/ext_temperatures"
+#  json_attributes_template: "{{ value_json['0'] | tojson }}"
+#- platform: rest
+#  name: "Shelly1 Garage"
+#
+
+#
+# template sensors
+- platform: template
+  sensors:
+    #wifisignal_heatpump_garage:
+    #  value_template: '{{ state_attr('sensor.heatpump_garage','temperature') }}'
+    #  device_class: temperature
+#    devicetemperature_heatpump_garage:
+#      value_template: '{{ states.sensor.heatpump_garage.attributes.temperature }}'
+#      device_class: temperature   
+#    temperature_outside:
+#      value_template: '{{ states.weather.home.attributes.temperature }}'
+#      device_class: temperature      
+    #thermostat_bath_temperature_goal:
+    #  value_template: '{{ states.climate.thermostat_bath.attributes.temperature }}'
+    #  device_class: temperature
+    #thermostat_bath_temperature_current:
+    #  value_template: '{{ states.climate.thermostat_bath.attributes.current_temperature }}'
+    #  device_class: temperature
+    #thermostat_bath_state:
+    #  value_template: '{{ states.climate.thermostat_bath.attributes.hvac_action }}'
+    #  device_class: temperature
+#    temperature_floorheating_delta:
+#      value_template: >- 
+#        {% set forward = states.sensor.temperature_floorheating_forward.state|float %}
+#        {% set back = states.sensor.temperature_floorheating_back.state|float %}
+#        {{  (forward - back)|round(1) }}
+#      device_class: temperature
+    weather_station_akrafjall_temperature:
+      friendly_name: "Akrafjall Hitastig"
+      value_template: '{{ states.sensor.weather_station_akrafjall.attributes["T"] }}'
+      device_class: temperature
+      unit_of_measurement: '°C'
+    weather_station_akrafjall_windspeed:
+      friendly_name: "Akrafjall Vindhraði"
+      value_template: '{{ states.sensor.weather_station_akrafjall.attributes["F"] }}'
+      #device_class: temperature
+      unit_of_measurement: 'm/s'
+    weather_station_akrafjall_rain:
+      friendly_name: "Akrafjall Rigning"
+      value_template: '{{ states.sensor.weather_station_akrafjall.attributes["R"] }}'
+      #device_class: temperature
+      unit_of_measurement: 'mm/h'
+#    temperature_apartment_delta:
+#      value_template: >- 
+#        {% set goal = states.input_number.goal_temperature_apartment.state|float %}
+#        {% set actual = states.sensor.temperature_apartment.state|float %}
+#        {{  (actual - goal)|round(1) }}
+#      device_class: temperature
+#    temperature_livingroom_delta:
+#      value_template: >- 
+#        {% set goal = states.input_number.goal_temperature_livingroom.state|float %}
+#        {% set actual = states.sensor.temperature_livingroom.state|float %}
+#        {{  (actual - goal)|round(1) }}
+#      device_class: temperature
+#    energy_washingmachine_delta:
+#      value_template: >-
+#        {% set max = states.sensor.washingmachine_max_energy.state|float %}
+#        {% set current = states.sensor.energy_washingmachine.state|float %}
+#        {{ (max - current)|round(1) }}
+        
+# 
+# vegagerdin MQTTT sensor
+# Kjalarnes
+- platform: mqtt
+  name: "road_condition_kjalarnes"
+  #device_class: temperature
+  state_topic: "homeassistant/vegagerdin/kjalarnes"
+  icon: mdi:highway
+  value_template: "{{ value_json['passable'] }}"
+  json_attributes_topic: "homeassistant/vegagerdin/kjalarnes"
+  json_attributes_template: "{{ value_json | tojson }}"
+# Hellisheidi
+- platform: mqtt
+  name: "road_condition_hellisheidi"
+  state_topic: "homeassistant/vegagerdin/hellisheidi"
+  icon: mdi:highway
+  value_template: "{{ value_json['passable'] }}"
+  json_attributes_topic: "homeassistant/vegagerdin/hellisheidi"
+  json_attributes_template: "{{ value_json | tojson }}"
+
+# https://gist.github.com/gardart/0a7d2711fba1d34a59614923b21b82ab?fbclid=IwAR1x3t0-ZYBhCPE2LitdB1qTIf8uGOLCXcxq-yTqUCmciBQZojcMShN4N8A
+# weather station Akrafjall  
+- platform: rest
+  name: weather_station_akrafjall
+  scan_interval: 1200
+  json_attributes_path: "$.[0]"
+  json_attributes:
+    - id
+    - name
+    - time
+    - link
+    - F
+    - FX
+    - FG
+    - D
+    - T
+    - W
+    - V
+    - N
+    - P
+    - RH
+    - SNC
+    - SND
+    - SED
+    - RTE
+    - TD
+    - R
+    - err
+    - valid
+  resource: https://apis.is/weather/observations/is?stations=31572&time=3h
+  value_template: '{{ value_json.results.0.W }}'
+
+# 
+# Veðurspá MQTT sensor
+# Reykjavik
+- platform: mqtt
+  name: "vedurspa_reykjavik_6h"
+  state_topic: "homeassistant/vedurspa/reykjavik/6h"
+  icon: mdi:weather-partly-cloudy
+  device_class: temperature
+  unit_of_measurement: '°C'
+  value_template: "{{ value_json['temperature'] }}"
+  json_attributes_topic: "homeassistant/vedurspa/reykjavik/6h"
+  json_attributes_template: "{{ value_json | tojson }}"
+- platform: mqtt
+  name: "vedurspa_reykjavik_12h"
+  state_topic: "homeassistant/vedurspa/reykjavik/12h"
+  icon: mdi:weather-partly-cloudy
+  device_class: temperature
+  unit_of_measurement: '°C'
+  value_template: "{{ value_json['temperature'] }}"
+  json_attributes_topic: "homeassistant/vedurspa/reykjavik/12h"
+  json_attributes_template: "{{ value_json | tojson }}"
+# Hvanneyri
+- platform: mqtt
+  name: "vedurspa_hvanneyri_6h"
+  state_topic: "homeassistant/vedurspa/hvanneyri/6h"
+  icon: mdi:weather-partly-cloudy
+  device_class: temperature
+  unit_of_measurement: '°C'
+  value_template: "{{ value_json['temperature'] }}"
+  json_attributes_topic: "homeassistant/vedurspa/hvanneyri/6h"
+  json_attributes_template: "{{ value_json | tojson }}"
+- platform: mqtt
+  name: "vedurspa_hvanneyri_12h"
+  state_topic: "homeassistant/vedurspa/hvanneyri/12h"
+  icon: mdi:weather-partly-cloudy
+  device_class: temperature
+  unit_of_measurement: '°C'
+  value_template: "{{ value_json['temperature'] }}"
+  json_attributes_topic: "homeassistant/vedurspa/hvanneyri/12h"
+  json_attributes_template: "{{ value_json | tojson }}"
+# testing if vedurspa.py is running
+- platform: mqtt
+  name: "vedurspa_running"
+  state_topic: "homeassistant/vedurspa"
+# command line sensor to import data from vedur.is
+#- platform: command_line
+#  name: "vedur_commandline_sensor"
+#  command: 'python3.8 /home/homeassistant/.homeassistant/python_scripts/vedurspa.py'
+#  scan_interval: 600
+
+# Floorheat level populated by floorheat automation
+#- platform: mqtt
+#  name: Floorheat forward state
+#  state_topic: "homeassistant/floorheat/level"
+
+
+# REST sensor for 
+- platform: rest
+  resource: http://snjallingur.is/api
+  name: snjallingur
+  value_template: '{{ value_json.status }}'
+  timeout: 5
+  scan_interval: 14400
+  method: GET
+  json_attributes:
+    - HA_version
+    - HA_latest_stable
+    - HA_BETA
+    - Option3
+
+# time sensor
+#- platform: template
+#  sensors:
+#    time_formatted:
+#      friendly_name: "Klukkan"
+#      value_template: "{{ as_timestamp(now()) | timestamp_custom('%H:%M:%S') }}"
+#      icon_template: mdi:clock
+
+# Shelly1pm Washingmachine
+# ip: http://192.168.132.118
+#- platform: mqtt
+#  name: "Power Washingmachine"
+#  state_topic: "shellies/shelly1pm-D8BFC019C5D8/relay/0/power"
+#  device_class: power
+#- platform: mqtt
+#  name: "Energy Washingmachine"
+#  state_topic: "shellies/shelly1pm-D8BFC019C5D8/relay/0/energy"
+#  device_class: energy
+#- platform: mqtt
+#  name: "Device temperature Washingmachine"
+#  state_topic: "shellies/shelly1pm-D8BFC019C5D8/temperature"
+#  device_class: temperature
+#
+# Washing machine counter per month
+#- platform: mqtt
+#  name: "Washingmachine monthly washes"
+#  state_topic: "homeassistant/washingmachine/month_counter"
+#  value_template: "{{ value_json['count'] }}"
+#  json_attributes_topic: "homeassistant/washingmachine/month_counter"
+#  json_attributes_template: "{{ value_json | tojson }}"
+#
+# Washingmachine max power and max energy
+#- platform: mqtt
+#  name: "Washingmachine max power"
+#  state_topic: "homeassistant/washingmachine/max_power"
+#  device_class: power
+#- platform: mqtt
+#  name: "Washingmachine max energy"
+#  state_topic: "homeassistant/washingmachine/max_energy"
+#  device_class: power
+#
+# Washingmachine Sensor
+#- platform: mqtt
+#  name: "Washingmachine"
+#  icon: mdi:washing-machine
+#  state_topic: "homeassistant/washingmachine/status"
+  #device_class: power
+#  value_template: "{{ value_json['status'] }}"
+#  json_attributes_topic: "homeassistant/washingmachine/status"
+#  json_attributes_template: "{{ value_json | tojson }}"
+
+# https://www.home-assistant.io/integrations/systemmonitor/
+- platform: systemmonitor
+  resources:
+    - type: disk_use_percent
+      arg: /
+    - type: memory_free
+    - type: disk_free
+      arg: /
+    - type: memory_use
+    - type: load_5m
+    - type: processor_temperature
+    - type: last_boot
+    - type: processor_use
+#Loftgæðamælir
+#https://pastebin.com/jQauNX2v?fbclid=IwAR2admldCLUMazp049zGbRr9ypM4PwrMoo0HmwyJaWV42LBh1SkOKNfdv3s
+#
+- platform: rest
+  name: air_quality
+  resource: https://api.ust.is/aq/a/getLatest
+  #STA-IS0037A (Kópavogur Dalsmári)
+  #STA-IS0005A ()
+  json_attributes_path: "$.STA-IS0005A.parameters"
+  json_attributes:
+    - H2S
+    - NO
+    - NO2
+    - PM1
+    - PM10
+    - PM2.5
+    - SO2
+    - BaP
+    - m,p-C6H4(CH3)2
+    - CH4
+    - C6H5-CH3
+    - O3
+    - H2S
+    - C6H6
+    - CO
+    - THC (NM)
+  value_template: "{{value_json['STA-IS0005A'].name}}"
+  scan_interval: 3600
+- platform: template
+  sensors:
+    air_quality_h2s:
+      friendly_name: "Brennisteinsvetni (H2S)"
+      value_template: "{{ state_attr('sensor.air_quality','H2S')['0']['value'] | float }}"
+      unit_of_measurement: "µg/m3"
+      icon_template: "mdi:air-filter"
+    air_quality_no:
+      friendly_name: "Köfnunarefni (NO)"
+      value_template: "{{ state_attr('sensor.air_quality','NO')['0']['value'] | float }}"
+      unit_of_measurement: "µg/m3"
+      icon_template: "mdi:air-filter"
+    air_quality_no2:
+      friendly_name: "Köfnunarefnisdíoxíð (NO2)"
+      value_template: "{{ state_attr('sensor.air_quality','NO2')['0']['value'] | float }}"
+      unit_of_measurement: "µg/m3"
+      icon_template: "mdi:air-filter"
+    air_quality_pm1:
+      friendly_name: "Fínt svifrik (PM1)"
+      value_template: "{{ state_attr('sensor.air_quality','PM1')['0']['value'] | float }}"
+      unit_of_measurement: "µg/m3"
+      icon_template: "mdi:air-filter"
+    air_quality_pm10:
+      friendly_name: "Svifrik (PM10)"
+      value_template: "{{ state_attr('sensor.air_quality','PM10')['0']['value'] | float }}"
+      unit_of_measurement: "µg/m3"
+      icon_template: "mdi:air-filter"
+    air_quality_pm25:
+      friendly_name: "Fínt svifrik (PM2.5)"
+      value_template: "{{ state_attr('sensor.air_quality','PM2.5')['0']['value'] | float }}"
+      unit_of_measurement: "µg/m3"
+      icon_template: "mdi:air-filter"
+    air_quality_so2:
+      friendly_name: "Brennisteinsdíoxíð (SO2)"
+      value_template: "{{ state_attr('sensor.air_quality','SO2')['0']['value'] | float }}"
+      unit_of_measurement: "µg/m3"
+      icon_template: "mdi:air-filter"
