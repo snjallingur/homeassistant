@@ -1,5 +1,7 @@
 #sudo useradd -m -s $(which bash) -G sudo snjallingur
 #passwd snjallingur
+#sudo gpasswd -a snjallingur dialout
+#sudo chmod 670 /dev/ttyS1
 sudo add-apt-repository -y ppa:hardkernel/ppa
 sudo apt-get update
 sudo apt-get upgrade
