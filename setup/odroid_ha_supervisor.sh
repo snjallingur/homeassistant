@@ -11,6 +11,7 @@ sudo gpasswd -a snjallingur dialout
 sudo apt-get -y install apt-transport-https ca-certificates curl gnupg lsb-release pkg-config build-essential libgpiod-dev
 sudo apt-get -y install make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python-openssl git
 sudo apt-get -y install -y python3 python3-dev python3-pip odroid-wiringpi libwiringpi-dev cgroup-tools zlib1g-dev
+sudo apt-get -y install libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
 sudo apt --fix-broken install
 sudo reboot
 #Docker installation
