@@ -5,12 +5,12 @@ sudo apt-get update
 sudo apt-get upgrade
 
 sudo apt-get -y install jq wget curl avahi-daemon udisks2 libglib2.0-bin network-manager dbus apparmor -y
-sudo apt-get -y install odroid-wiringpi libwiringpi-dev
+sudo apt-get -y install libwiringpi-dev
 sudo groupadd i2cc
 sudo gpasswd -a snjallingur dialout
 sudo apt-get -y install apt-transport-https ca-certificates curl gnupg lsb-release pkg-config build-essential libgpiod-dev
 sudo apt-get -y install make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python-openssl git
-sudo apt-get -y install -y python3 python3-dev python3-pip odroid-wiringpi libwiringpi-dev cgroup-bin
+sudo apt-get -y install -y python3 python3-dev python3-pip odroid-wiringpi libwiringpi-dev cgroup-tools
 sudo apt --fix-broken install
 sudo reboot
 #Docker installation
