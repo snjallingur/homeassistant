@@ -71,6 +71,11 @@ sudo systemctl enable cloudflared
 #credentials-file: /home/homeassistant/.cloudflared/tunnel.json
 #origincert: /home/homeassistant/.cloudflared/tunnel.json
 
+#Python installation 
+#with Pyenv
+
+pip install wheel paho-mqtt requests lxml html5lib bs4
+
 
 #flashing RaspBee2 Zigbee dongle
 #Install falshing tool
