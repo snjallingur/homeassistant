@@ -3,14 +3,15 @@
 sudo apt-get update
 sudo apt-get upgrade
 
-sudo apt-get -y install gnupg2 wget ca-certificates lsb-release software-properties-common
-sudo apt-get -y install jq wget curl avahi-daemon udisks2 libglib2.0-bin network-manager dbus apparmor -y
-sudo apt-get -y install odroid-wiringpi libwiringpi-dev
+
 sudo groupadd i2cc
 sudo gpasswd -a snjallingur dialout
+
+#INstall packages
+sudo apt-get -y install  libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev git
 sudo apt-get -y install apt-transport-https ca-certificates curl gnupg lsb-release pkg-config build-essential libgpiod-dev
 sudo apt-get -y install make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev git
-sudo apt-get -y install -y python3 python3-dev python3-pip odroid-wiringpi libwiringpi-dev apparmor-utils grub2-common uidmap
+sudo apt-get -y install -y python3 python3-dev python3-pip odroid-wiringpi libwiringpi-dev apparmor-utils uidmap
 sudo apt --fix-broken install
 sudo reboot
 #Docker installation
@@ -27,6 +28,10 @@ gdbus introspect --system --dest io.hass.os --object-path /io/hass/os
 #Installing pyenv guidelines
 #https://www.liquidweb.com/kb/how-to-install-pyenv-on-ubuntu-18-04/
 git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
+echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
+echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n eval "$(pyenv init -)"\nfi' >> ~/.bashrc
+exec "$SHELL"
 
 #Installing Supervisor guidelines
 #https://peyanski.com/how-to-install-home-assistant-supervised-official-way/
