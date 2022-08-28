@@ -24,13 +24,19 @@ sudo apt-get -y install libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqli
 sudo apt --fix-broken install
 sudo reboot
 #Docker installation
-curl -fsSL https://get.docker.com -o get-docker.sh
-sudo sh get-docker.sh
+#curl -fsSL https://get.docker.com -o get-docker.sh
+#sudo sh get-docker.sh
+curl -fsSL get.docker.com | sh
+
 sudo usermod -aG docker snjallingur
 
+#change resolve.conf
+sudo nano /etc/resolv.conf
+#nameserver 8.8.8.8
+
 #Installing Hass OS agent
-wget https://github.com/home-assistant/os-agent/releases/download/1.2.2/os-agent_1.2.2_linux_aarch64.deb
-sudo dpkg -i os-agent_1.2.2_linux_aarch64.deb
+wget https://github.com/home-assistant/os-agent/releases/download/1.3.0/os-agent_1.3.0_linux_aarch64.deb
+sudo dpkg -i os-agent_1.3.0_linux_aarch64.deb
 #check output of
 gdbus introspect --system --dest io.hass.os --object-path /io/hass/os
 
