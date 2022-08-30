@@ -92,8 +92,9 @@ cd gcfflasher
 ./build_posix.sh
 #https://github.com/dresden-elektronik/deconz-rest-plugin/wiki/Update-deCONZ-manually#update-in-raspbian
 #sudo chmod 670 /dev/ttyS0
-wget https://deconz.dresden-elektronik.de/deconz-firmware/deCONZ_RaspBeeII_0x26720700.bin.GCF
-./GCFFlasher -d /dev/ttyS0 -t 60 -f deCONZ_RaspBeeII_0x26720700.bin.GCF
+wget https://deconz.dresden-elektronik.de/deconz-firmware/deCONZ_RaspBeeII_0x26780700.bin.GCF
+
+./GCFFlasher -d /dev/ttyS0 -t 60 -f deCONZ_RaspBeeII_0x26780700.bin.GCF
 cd ..
 
 #Add to /etc/crontab
