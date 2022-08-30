@@ -2,9 +2,23 @@
 #passwd snjallingur
 #sudo gpasswd -a snjallingur dialout
 #sudo chmod 670 /dev/ttyS0
-sudo add-apt-repository -y ppa:hardkernel/ppa
+
+sudo apt install software-properties-common
+sudo add-apt-repository ppa:hardkernel/ppa
 sudo apt-get update
 sudo apt-get upgrade
+
+#Modify /boot/config.ini
+; Device Tree Overlay
+overlay_resize=16384
+overlay_profile=
+overlays="spi0 i2c0 i2c1 uart0 uart1"
+
+[overlay_custom]
+overlays="i2c0 i2c1"
+
+[overlay_hktft32]
+overlays="hktft32 ads7846"
 
 #Modify the Kernel loader file
 sudo nano /etc/default/flash-kernel
@@ -17,7 +31,7 @@ sudo apt-get -y install jq wget curl avahi-daemon udisks2 libglib2.0-bin network
 sudo apt-get -y install libwiringpi-dev
 sudo groupadd i2cc
 sudo gpasswd -a snjallingur dialout
-sudo apt-get -y install apt-transport-https ca-certificates curl gnupg lsb-release pkg-config build-essential libgpiod-dev
+sudo apt-get -y install odroid-wiringpi-python apt-transport-https ca-certificates curl gnupg lsb-release pkg-config build-essential libgpiod-dev
 sudo apt-get -y install make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python-openssl git
 sudo apt-get -y install -y python3 python3-dev python3-pip odroid-wiringpi libwiringpi-dev cgroup-tools zlib1g-dev udisks2 libglib2.0-bin avahi-daemon jq network-manager dbus apparmor
 sudo apt-get -y install libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
