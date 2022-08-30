@@ -1,7 +1,7 @@
 #sudo useradd -m -s $(which bash) -G sudo snjallingur
 #passwd snjallingur
 #sudo gpasswd -a snjallingur dialout
-#sudo chmod 670 /dev/ttyS1
+#sudo chmod 670 /dev/ttyS0
 sudo add-apt-repository -y ppa:hardkernel/ppa
 sudo apt-get update
 sudo apt-get upgrade
@@ -92,7 +92,7 @@ cd gcfflasher
 ./build_posix.sh
 #https://github.com/dresden-elektronik/deconz-rest-plugin/wiki/Update-deCONZ-manually#update-in-raspbian
 wget https://deconz.dresden-elektronik.de/deconz-firmware/deCONZ_RaspBeeII_0x26720700.bin.GCF
-./GCFFlasher -d /dev/ttyS1 -t 60 -f deCONZ_RaspBeeII_0x26720700.bin.GCF
+./GCFFlasher -d /dev/ttyS0 -t 60 -f deCONZ_RaspBeeII_0x26720700.bin.GCF
 cd ..
 
 #Add to /etc/crontab
