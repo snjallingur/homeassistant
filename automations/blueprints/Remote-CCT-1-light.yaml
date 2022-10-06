@@ -1,0 +1,81 @@
+blueprint:
+  name: Snjallingur Remote 1 CCT light
+  description: Automate CCT remote with ZHA events.
+  domain: automation
+  input:
+    snjallingur_remote_1_cct:
+      name: Snjallingur CCT Remote 1 light
+      description: Snjallingur Remote 1 light with 8 buttons (on/off,brightness,color,scenes)
+      selector:
+        device:
+          integration: zha
+          manufacturer: Sunricher
+          model: ZGRC-KEY-008
+    button_UL_short_press:
+      name: Upper Left  Button single press
+      description: Action to run on button upper-left single press
+      default: []
+      selector:
+        action: {}
+
+    button_UL_long_press:
+      name: Upper Left  Button long press
+      description: Action to run on button upper-left long press
+      default: []
+      selector:
+        action: {}
+
+    button_LL_short_press:
+      name: Lower left Button single press   
+      description: Action to run on button lower-left single press
+      default: []
+      selector:
+        action: {}
+
+    button_LL_long_press:
+      name: Lower left Button long press   
+      description: Action to run on button lower-left long press
+      default: []
+      selector:
+        action: {}
+    
+    button_UR_short_press:
+      name: Upper Right Button single press
+      description: Action to run on button upper-right single press
+      default: []
+      selector:
+        action: {}
+    button_UR_long_press:
+      name: Upper Right Button long press
+      description: Action to run on button upper-right long press
+      default: []
+      selector:
+        action: {}
+
+    button_LR_short_press:
+      name: Lower Right Button single press
+      description: Action to run on button lower-right single press
+      default: []
+      selector:
+        action: {}
+
+    button_LR_long_press:
+      name: Lower Right Button long press
+      description: Action to run on button lower-right long press
+      default: []
+      selector:
+        action: {}
+
+    button_U_stop_long_press:
+      name: Uper Stop long press
+      description: Action to run on buttons uper stop long press
+      default: []
+      selector:
+        action: {}
+
+    button_L_stop_long_press:
+      name: Lower Stop long press
+      description: Action to run on button lower stop long press
+      default: []
+      selector:
+        action: {}
