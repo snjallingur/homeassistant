@@ -73,11 +73,20 @@ if z=$(curl -s 'https://install.zerotier.com/' | gpg); then echo "$z" | sudo bas
 #sudo service zerotier-one start
 
 #CLoudflared
+#Install via package manager
+# Add cloudflare gpg key
+sudo mkdir -p --mode=0755 /usr/share/keyrings
+curl -fsSL https://pkg.cloudflare.com/cloudflare-main.gpg | sudo tee /usr/share/keyrings/cloudflare-main.gpg >/dev/null
+# Add this repo to your apt repositories
+echo 'deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudflare.com/cloudflared focal main' | sudo tee /etc/apt/sources.list.d/cloudflared.list
+
 #cloudflared tunnel route dns xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxx demo.snjallingur.is
 #sudo nano /etc/cloudflared/config.yml
-wget -O cloudflared https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-arm64
-sudo mv cloudflared /usr/local/bin
-sudo chmod +x /usr/local/bin/cloudflared
+#manual install
+#wget -O cloudflared https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-arm64
+#sudo mv cloudflared /usr/local/bin
+#sudo chmod +x /usr/local/bin/cloudflared
+#Check on installed version
 #cloudflared -v
 sudo mkdir /etc/cloudflared
 sudo bash -c 'cat  cloudflare.txt > /etc/cloudflared/config.yml'
