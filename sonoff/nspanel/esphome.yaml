@@ -41,7 +41,7 @@ wifi:
   use_address: nspanel-appdaemon.local
   ap:
     ssid: "NSPanel"
-    password: "nspanel8"
+    password: "snjallingur"
 
 
 # https://esphome.io/components/captive_portal.html
@@ -52,7 +52,7 @@ captive_portal:
 # Logger. Disable the temperature sensor etc. to focus on the HMI development
 logger:
   baud_rate: 115200
-  level: DEBUG
+  level: INFO
   logs:
     sensor: WARN
     resistance: WARN
@@ -77,7 +77,7 @@ mqtt:
   client_id: nspanel
 
 nspanel_lovelace:
-  id: nspanel_appdaemon
+  id: nspanel_entrance
   mqtt_recv_topic: $panel_recv_topic
   mqtt_send_topic: $panel_send_topic
   #on_incoming_message:
