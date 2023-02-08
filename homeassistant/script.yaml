@@ -1,0 +1,10 @@
+webcam_record:
+  alias: Webcam record
+  sequence:
+  - service: camera.record
+    data:
+      duration: 45
+      filename: /home/homeassistant/Videos/Garage/{{ now().year }}/{{ now().month
+        }}/{{ now().day}}/Garage-{{ as_timestamp(now())|timestamp_custom('%H:%M')}}.mp4
+    target:
+      entity_id: camera.webcam_garage_profile000_mainstream
