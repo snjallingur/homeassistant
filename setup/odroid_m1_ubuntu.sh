@@ -35,6 +35,7 @@ sudo apt-get -y install odroid-wiringpi-python apt-transport-https ca-certificat
 sudo apt-get -y install make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python-openssl git
 sudo apt-get -y install -y python3 python3-dev python3-pip odroid-wiringpi libwiringpi-dev cgroup-tools zlib1g-dev udisks2 libglib2.0-bin avahi-daemon jq network-manager dbus apparmor
 sudo apt-get -y install libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
+sudo apt install systemd-journal-remote -y
 sudo apt --fix-broken install
 sudo reboot
 #Docker installation
