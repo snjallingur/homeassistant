@@ -9,20 +9,23 @@
 
 ##### GENEREL CONFIG ########
 substitutions:
-  node_name: nspanel-appdaemon  # $node_name
-  device_name: nspanel-appdaemon # $device_name
-  wifi_ssid: xxxxx
-  wifi_pass: xxxxxxxx
-  friendly_devicename: NSPanel Dev
+  node_name: nspanel-entry  # $node_name
+  device_name: nspanel-entry # $device_name
+  #wifi_ssid: xxxxx
+  #wifi_pass: xxxxxxxx
+  friendly_devicename: NSPanel Entrance
   panel_recv_topic: "tele/nspanel/RESULT"
   panel_send_topic: "cmnd/nspanel/CustomSend"
-  tft_url: https://skogarflot26.snjallingur.is/local/uploads/nspanel/nspanel.tft
+  #tft_url: https://skogarflot26.snjallingur.is/local/uploads/nspanel/nspanel.tft
+  #mqttbroker: 192.168.1.101
+  #mqttuser:
+  #mqttpassword: 
 
 
 ##### ESP home CONFIG #####
 esphome:
   name: $node_name
-  comment: $device_name
+  comment: ${device_name}
 
 ##### TYPE OF ESP BOARD #####
 esp32:
@@ -30,17 +33,17 @@ esp32:
 
 ##### WIFI SETUP #####
 wifi:
-  networks:
-  - ssid: $wifi_ssid
-    password: $wifi_password
+  #networks:
+  #- ssid: $wifi_ssid
+  #  password: $wifi_password
   power_save_mode: none
-  manual_ip:
-    static_ip: 192.168.xxx.xxx
-    gateway: 192.168.xxx.xxx
-    subnet: 255.255.255.0
-  use_address: nspanel-appdaemon.local
+  #manual_ip:
+  #  static_ip: 192.168.xxx.xxx
+  #  gateway: 192.168.xxx.xxx
+  #  subnet: 255.255.255.0
+  #use_address: nspanel-appdaemon.local
   ap:
-    ssid: "NSPanel"
+    ssid: "snjallingur"
     password: "snjallingur"
 
 
@@ -66,20 +69,20 @@ external_components:
   - source:
       type: git
       url: https://github.com/sairon/esphome-nspanel-lovelace-ui
-      ref: dev
+      ref: release/v0.2.x
     components: [nspanel_lovelace]
 
 # https://esphome.io/components/mqtt.html
 mqtt:
-  broker: 192.168.132.135
+  broker: 192.168.1.101
   username: homeassistant
-  password: snjallingur
-  client_id: nspanel
+  password: La0voozeihohfae8Soh0Thizeeyah8ahg5bias5kahqu3uyoo0Fie9shee9rie6i
+  client_id: ${device_name}
 
 nspanel_lovelace:
   id: nspanel_entrance
-  mqtt_recv_topic: $panel_recv_topic
-  mqtt_send_topic: $panel_send_topic
+  mqtt_recv_topic: ${panel_recv_topic}
+  mqtt_send_topic: ${panel_send_topic}
   #on_incoming_message:
 
 
@@ -97,7 +100,7 @@ api:
         url: string
       then:
         - lambda: |-
-            id(nspanel_appdaemon).upload_tft(url);
+            id(nspanel_entrance).upload_tft(url);
     # Service to play a rtttl tone
     - service: play_rtttl
       variables:
@@ -110,21 +113,21 @@ api:
       variables:
         cmd: string
       then:
-        - lambda: "id(nspanel_appdaemon).send_custom_command(cmd.c_str());"
+        - lambda: "id(nspanel_entrance).send_custom_command(cmd.c_str());"
     # Service to send a command To show the screen of a specific like
     - service: show_entity
       variables:
         entity: string
         title: string
       then:
-        - lambda: 'id(nspanel_appdaemon).send_custom_command("pageType~popupLight~" + title + "~" + entity);'
+        - lambda: 'id(nspanel_entrance).send_custom_command("pageType~popupLight~" + title + "~" + entity);'
     # Service to send a command To show the screen of a specific like
     - service: notify_on_screensaver
       variables:
         line1: string
         line2: string
       then:
-        - lambda: 'id(nspanel_appdaemon).send_custom_command("notify~" + line1 + "~" + line2);'
+        - lambda: 'id(nspanel_entrance).send_custom_command("notify~" + line1 + "~" + line2);'
         - rtttl.play: "short:d=4,o=5,b=100:16e6"
     # Service to pusblish to mqtt used for refreshin the panel
     - service: publish_to_recv_topic
@@ -137,7 +140,7 @@ api:
     # Service to send a command wake the screen
     - service: wake
       then:
-        - lambda: 'id(nspanel_appdaemon).send_custom_command("wake");'
+        - lambda: 'id(nspanel_entrance).send_custom_command("wake");'
     # Service to send a command to show screensaver (some of the values are hardcoded)
     - service: show_screensaver
       then:
@@ -156,24 +159,24 @@ api:
     # Service to send a command disable screensaver
     - service: disable_screensaver
       then:
-        - lambda: 'id(nspanel_appdaemon).send_custom_command("timeout~0");'
+        - lambda: 'id(nspanel_entrance).send_custom_command("timeout~0");'
     # Service to send a command enabled screensaver
     - service: enable_screensaver
       then:
-        - lambda: 'id(nspanel_appdaemon).send_custom_command("timeout~20");'
+        - lambda: 'id(nspanel_entrance).send_custom_command("timeout~20");'
     # Service to send a command wake the screen
     - service: dim_0_to_100
       variables:
         intensity: string
       then:
-        - lambda: 'id(nspanel_appdaemon).send_custom_command("dimmode~"+intensity+"~100");'
+        - lambda: 'id(nspanel_entrance).send_custom_command("dimmode~"+intensity+"~100");'
     # Service to send a command To show the screen of a specific like
     - service: show_entity
       variables:
         entity: string
         title: string
       then:
-        - lambda: 'id(nspanel_appdaemon).send_custom_command("pageType~popupLight~" + title + "~" + entity);'
+        - lambda: 'id(nspanel_entrance).send_custom_command("pageType~popupLight~" + title + "~" + entity);'
     # Service to send a command To show the screen of a specific like
     # interaction of the buttons are on implemented yet
     - service: notify_fullscreen
@@ -185,10 +188,10 @@ api:
         time_secs: string
       then:
         # show notification screen
-        - lambda: 'id(nspanel_appdaemon).send_custom_command("pageType~popupNotify");'
+        - lambda: 'id(nspanel_entrance).send_custom_command("pageType~popupNotify");'
         # set values on notification screen
         # color defined as number created in binary and converted to decimal (rrrrggggbbbbaaaa)
-        - lambda: 'id(nspanel_appdaemon).send_custom_command("entityUpdateDetail~id~"+ title + "~65535~" + button1 +"~3840~" + button2 + "~61440~" + description + "~65535~" + time_secs);'
+        - lambda: 'id(nspanel_entrance).send_custom_command("entityUpdateDetail~id~"+ title + "~65535~" + button1 +"~3840~" + button2 + "~61440~" + description + "~65535~" + time_secs);'
         - rtttl.play: "scale_up:d=32,o=5,b=100:c,c#,d#,e,f#,g#,a#,b"
 
 sensor:
@@ -239,7 +242,7 @@ switch:
     on_turn_on:
       # show a light on the panel when we swich on the light
       # - lambda: 'id(nspanel).send_custom_command("pageType~popupLight~[TITLE TO SHOW ON SCREEN]~[ENTITY NAME]");'
-      - lambda: 'id(nspanel_appdaemon).send_custom_command("pageType~popupLight~Light 1~light.bed_light");'
+      - lambda: 'id(nspanel_entrance).send_custom_command("pageType~popupLight~Light 1~light.bed_light");'
     on_turn_off:
       # send to screensaver when switch off the light
       - mqtt.publish:
@@ -254,7 +257,7 @@ switch:
       number: 19
     on_turn_on:
       # show a light on the panel when we swich on the light
-      - lambda: 'id(nspanel_appdaemon).send_custom_command("pageType~popupLight~Light 2~light.bed_light2");'
+      - lambda: 'id(nspanel_entrance).send_custom_command("pageType~popupLight~Light 2~light.bed_light2");'
     on_turn_off:
       # send to screensaver when switch off the light
       - mqtt.publish:
@@ -298,5 +301,5 @@ switch:
 ###### A reboot button is always useful #####
 button:
   - platform: restart
-    name: $device_name Restart
+    name: ${device_name} Restart
     id: restart_nspanel
