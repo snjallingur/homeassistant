@@ -33,3 +33,15 @@ It is in our opinion the most versatile addon with a lot of options and possibil
 
 The changed the proposed code a bit. It will create a Hotspot with the ssid "snjallingur" (password is the same) to allow an easy setup for others.
 
+Before flushing make sure to erase the flash
+
+``
+esptool.py erase_flash
+``
+
+Then flush the NSPanle with your yaml code
+
+``
+esphome run nspanel_esphome.yaml
+``
+
