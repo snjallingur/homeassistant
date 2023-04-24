@@ -33,14 +33,25 @@ It is in our opinion the most versatile addon with a lot of options and possibil
 
 The changed the proposed code a bit. It will create a Hotspot with the ssid "snjallingur" (password is the same) to allow an easy setup for others.
 
-Before flushing make sure to erase the flash
+Before flashing make sure to erase the flash
 
 ``
 esptool.py erase_flash
 ``
 
-Then flush the NSPanle with your yaml code
+Then flash the NSPanel with your yaml code
 
 ``
 esphome run nspanel_esphome.yaml
 ``
+
+when esphome has finished compiling your binary file that will be flashed on your NS Panel, it will ask you to determine how to connect to your NS Panel (through a serial connection connected to your computer or to transmit the files over the air with your WiFi connection). 
+
+or when using esptools for flashing you could leverage a command like:
+
+``
+esptool.py -p /dev/cu.usbserial-0001 -b 460800 --before default_reset --after hard_reset --chip esp32  write_flash --flash_mode dio --flash_size detect --flash_freq 40m 0x1000 bootloader.bin 0x8000 partitions.bin 0x10000 nspanel-firmware.bin
+``
+
+the esptool offers a lot more options for compiling and is therefore more flexible but also more complicated. Further references on the available options can be [found here](https://docs.espressif.com/projects/esptool/en/latest/esp32/esptool/flashing-firmware.html#flashing).
+
