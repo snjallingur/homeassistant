@@ -9,23 +9,23 @@
 
 ##### GENEREL CONFIG ########
 substitutions:
-  node_name: nspanel-entry  # $node_name
-  device_name: nspanel-entry # $device_name
+  node_name: snjallingur-nspanel  # $node_name
+  device_name: snjallingur-nspanel # $device_name
   #wifi_ssid: xxxxx
   #wifi_pass: xxxxxxxx
   friendly_devicename: NSPanel Entrance
   panel_recv_topic: "tele/nspanel/RESULT"
   panel_send_topic: "cmnd/nspanel/CustomSend"
   #tft_url: https://skogarflot26.snjallingur.is/local/uploads/nspanel/nspanel.tft
-  #mqttbroker: 192.168.1.101
-  #mqttuser:
-  #mqttpassword: 
+  mqttbroker: 192.168.xxx.xxx
+  mqttuser: "yourmqttuser"
+  mqttpassword: "yourmqttpassword"
 
 
 ##### ESP home CONFIG #####
 esphome:
   name: $node_name
-  comment: ${device_name}
+  comment: $device_name
 
 ##### TYPE OF ESP BOARD #####
 esp32:
@@ -74,9 +74,9 @@ external_components:
 
 # https://esphome.io/components/mqtt.html
 mqtt:
-  broker: 192.168.1.101
-  username: homeassistant
-  password: La0voozeihohfae8Soh0Thizeeyah8ahg5bias5kahqu3uyoo0Fie9shee9rie6i
+  broker: $mqttbroker
+  username: $mqttuser
+  password: $mqttpassword
   client_id: ${device_name}
 
 nspanel_lovelace:
@@ -84,8 +84,6 @@ nspanel_lovelace:
   mqtt_recv_topic: ${panel_recv_topic}
   mqtt_send_topic: ${panel_send_topic}
   #on_incoming_message:
-
-
 
 # Uart for the Nextion display
 uart:
