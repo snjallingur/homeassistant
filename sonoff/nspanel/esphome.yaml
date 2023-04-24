@@ -16,7 +16,7 @@ substitutions:
   friendly_devicename: NSPanel Entrance
   panel_recv_topic: "tele/nspanel/RESULT"
   panel_send_topic: "cmnd/nspanel/CustomSend"
-  #tft_url: https://skogarflot26.snjallingur.is/local/uploads/nspanel/nspanel.tft
+  #tft_url: https://<yourHAaddress>/local/uploads/nspanel/nspanel.tft
   mqttbroker: 192.168.xxx.xxx
   mqttuser: "yourmqttuser"
   mqttpassword: "yourmqttpassword"
