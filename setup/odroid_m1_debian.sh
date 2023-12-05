@@ -6,12 +6,16 @@ sudo apt-get upgrade
 
 sudo groupadd i2cc
 sudo gpasswd -a snjallingur dialout
+#add user snjallingur to sudoers
+sudo usermod -aG sudo snjallingur
 
 #INstall packages
 sudo apt-get -y install  libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev git
 sudo apt-get -y install apt-transport-https ca-certificates curl gnupg lsb-release pkg-config build-essential libgpiod-dev
 sudo apt-get -y install make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev git
 sudo apt-get -y install -y python3 python3-dev python3-pip odroid-wiringpi libwiringpi-dev apparmor-utils uidmap
+sudo apt-get -y install apparmor cifs-utils dbus jq libglib2.0-bin lsb-release network-manager nfs-common systemd-journal-remote udisks2 wget
+#systemd-resolved 
 sudo apt --fix-broken install
 sudo reboot
 #Docker installation
@@ -20,8 +24,8 @@ sudo sh get-docker.sh
 sudo usermod -aG docker snjallingur
 
 #Installing Hass OS agent
-wget https://github.com/home-assistant/os-agent/releases/download/1.2.2/os-agent_1.2.2_linux_aarch64.deb
-sudo dpkg -i os-agent_1.2.2_linux_aarch64.deb
+wget https://github.com/home-assistant/os-agent/releases/download/1.6.0/os-agent_1.6.0_linux_aarch64.deb
+sudo dpkg -i os-agent_1.6.0_linux_aarch64.deb
 #check output of
 gdbus introspect --system --dest io.hass.os --object-path /io/hass/os
 
@@ -43,7 +47,7 @@ sudo dpkg -i homeassistant-supervised.deb
 curl -s 'https://raw.githubusercontent.com/zerotier/ZeroTierOne/master/doc/contact%40zerotier.com.gpg' | gpg --import && \
 if z=$(curl -s 'https://install.zerotier.com/' | gpg); then echo "$z" | sudo bash; fi
 #join Zerotier network
-#zerotier-cli join xxxxxxxxx
+#sud xxxxxxxxx
 #remove a zerotier connection
 #sudo service zerotier-one stop
 #sudo rm /var/lib/zerotier-one/identity.*
