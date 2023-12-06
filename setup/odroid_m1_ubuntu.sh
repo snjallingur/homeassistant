@@ -24,6 +24,9 @@ overlays="hktft32 ads7846"
 sudo nano /etc/default/flash-kernel
 #add security=apparmor
 #LINUX_KERNEL_CMDLINE="root=UUID=9ceb92e1-c737-4cfe-8a90-bdad2af420b1 quiet splash security=apparmor"
+#apparmor=1 security=apparmor
+#cgroupv1
+#systemd.unified_cgroup_hierarchy=0
 #update boot file
 sudo update-bootscript
 
