@@ -1,3 +1,14 @@
+#Modify the Kernel loader file
+sudo nano /etc/default/flash-kernel
+#add apparmor=1 security=apparmor
+#Docker cGroupV1
+#systemd.unified_cgroup_hierarchy=0
+#LINUX_KERNEL_CMDLINE="root=systemd.unified_cgroup_hierarchy=0 quiet splash security=apparmor apparmor=1"
+#update boot file
+sudo update-bootscript
+
+
+
 #sudo useradd -m -s $(which bash) -G sudo snjallingur
 #passwd snjallingur
 sudo apt-get update
