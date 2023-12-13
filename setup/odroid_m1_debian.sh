@@ -7,8 +7,6 @@ sudo nano /etc/default/flash-kernel
 #update boot file
 sudo update-bootscript
 
-
-
 #sudo useradd -m -s $(which bash) -G sudo snjallingur
 #passwd snjallingur
 sudo apt-get update
@@ -101,3 +99,7 @@ cd ..
 */10 * * * * snjallingur bash --login -c "/home/snjallingur/.pyenv/shims/python3 /usr/share/hassio/homeassistant/snjallingur_scripts/vegagerdin.py" >> /home/snjallingur/cronjob.log 2>&1
 */15 * * * * snjallingur bash --login -c "/home/snjallingur/.pyenv/shims/python3 /usr/share/hassio/homeassistant/snjallingur_scripts/vedurspa.py" >> /home/snjallingur/cronjob.log 2>&1
 */30 * * * * snjallingur bash --login -c "/home/snjallingur/.pyenv/shims/python3 /usr/share/hassio/homeassistant/snjallingur_scripts/nordurljosaspa.py" >> /home/snjallingur/cronjob.log 2>&1
+
+#Resizing partion
+#follow instructions from here:
+#https://wiki.odroid.com/odroid-xu4/software/omv_nas/eng/how_to_expand_rootfs_size
