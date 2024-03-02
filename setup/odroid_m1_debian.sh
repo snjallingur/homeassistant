@@ -103,3 +103,14 @@ cd ..
 #Resizing partion
 #follow instructions from here:
 #https://wiki.odroid.com/odroid-xu4/software/omv_nas/eng/how_to_expand_rootfs_size
+
+#get WiFi dongle to work
+install wireless-tools
+sudo nmcli radio wifi on
+nmcli device wifi connect <ssid> password <password>
+sudo apt update
+sudo apt install build-essential git dkms
+git clone https://github.com/brektrou/rtl8821CU.git
+cd rtl8821CU
+chmod +x dkms-install.sh
+sudo ./dkms-install.sh
