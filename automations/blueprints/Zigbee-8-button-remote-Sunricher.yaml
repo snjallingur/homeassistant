@@ -1,0 +1,206 @@
+blueprint:
+  name: Zigbee 8-button switch from Sunricher
+  description: 'This blueprint is for the  Zigbee 8-button switch panel from Sunricher (ZG2833K8_EU05) when used with zha.
+    It is a modified blueprint from https://github.com/Bekkie/ha-blueprints/blob/main/automation/robb-smart-8-switch-ROBB-ROB_200-007-0.yaml
+    It is for general use so all buttons can be connected to any action of your choice.
+    This remote supports 
+    short button clicks (on and off)
+    long button presses
+    release button (same action for on and off button)
+
+    Make sure to select the correct sensor for the remote.
+
+    '
+  domain: automation
+  source_url: https://github.com/Bekkie/ha-blueprints/blob/main/automation/robb-smarrt-8-switch-ROB_200-007-0.yaml
+  input:
+    remote:
+      name: Remote
+      description: Switch remote to use
+      selector:
+        device:
+          integration: zha
+          model: ZG2833K8_EU05
+          multiple: false
+    on_button_1_short:
+      name: On button 1 - short
+      default: []
+      selector:
+        action: {}
+    off_button_1_short:
+      name: Off button 1 - short
+      default: []
+      selector:
+        action: {}
+    on_button_1_long:
+      name: On button 1 - long press
+      default: []
+      selector:
+        action: {}
+    off_button_1_long:
+      name: Off button 1 - long press
+      default: []
+      selector:
+        action: {}
+    on_off_button_1_release:
+      name: On/Off button 1 - release
+      default: []
+      selector:
+        action: {}
+    on_button_2_short:
+      name: On button 2 - short
+      default: []
+      selector:
+        action: {}
+    off_button_2_short:
+      name: Off button 2 - short
+      default: []
+      selector:
+        action: {}
+    on_button_2_long:
+      name: On button 2 - long press
+      default: []
+      selector:
+        action: {}
+    off_button_2_long:
+      name: Off button 2 - long press
+      default: []
+      selector:
+        action: {}
+    on_off_button_2_release:
+      name: On/Off button 2 - release
+      default: []
+      selector:
+        action: {}
+    on_button_3_short:
+      name: On button 3 - short
+      default: []
+      selector:
+        action: {}
+    off_button_3_short:
+      name: Off button 3 - short
+      default: []
+      selector:
+        action: {}
+    on_button_3_long:
+      name: On button 3 - long press
+      default: []
+      selector:
+        action: {}
+    off_button_3_long:
+      name: Off button 3 - long press
+      default: []
+      selector:
+        action: {}
+    on_off_button_3_release:
+      name: On/Off button 3 - release
+      default: []
+      selector:
+        action: {}
+    on_button_4_short:
+      name: On button 4 - short
+      default: []
+      selector:
+        action: {}
+    off_button_4_short:
+      name: Off button 4 - short
+      default: []
+      selector:
+        action: {}
+    on_button_4_long:
+      name: On button 4 - long press
+      default: []
+      selector:
+        action: {}
+    off_button_4_long:
+      name: Off button 4 - long press
+      default: []
+      selector:
+        action: {}
+    on_off_button_4_release:
+      name: On/Off button 4 - release
+      default: []
+      selector:
+        action: {}
+
+mode: restart
+max_exceeded: silent
+trigger:
+- platform: event
+  event_type: zha_event
+  event_data:
+    device_id: !input remote
+action:
+- variables:
+    button: '{{ trigger.event.data.endpoint_id }}'
+    cmd: '{{ trigger.event.data.command }}'
+    args: '{{ trigger.event.data.args }}'
+- choose:
+  - conditions:
+    - '{{ button == 1 and cmd == ''on'' }}'
+    sequence: !input on_button_1_short
+  - conditions:
+    - '{{ button == 1 and cmd == ''off'' }}'
+    sequence: !input off_button_1_short
+  - conditions:
+    - '{{ button == 1 and cmd == ''move_with_on_off'' }}'
+    sequence:
+    - if:
+      - condition:
+        - '{{ args[11] == "U" }}'
+      then: !input on_button_1_long
+      else: !input off_button_1_long
+  - conditions:
+    - '{{ button == 1 and cmd == ''stop_with_on_off'' }}'
+    sequence: !input on_off_button_1_release
+  - conditions:
+    - '{{ button == 2 and cmd == ''on'' }}'
+    sequence: !input on_button_2_short
+  - conditions:
+    - '{{ button == 2 and cmd == ''off'' }}'
+    sequence: !input off_button_2_short
+  - conditions:
+    - '{{ button == 2 and cmd == ''move_with_on_off'' }}'
+    sequence:
+    - if:
+      - condition:
+        - '{{ args[11] == "U" }}'
+      then: !input on_button_2_long
+      else: !input off_button_2_long
+  - conditions:
+    - '{{ button == 2 and cmd == ''stop_with_on_off'' }}'
+    sequence: !input on_off_button_2_release
+  - conditions:
+    - '{{ button == 3 and cmd == ''on'' }}'
+    sequence: !input on_button_3_short
+  - conditions:
+    - '{{ button == 3 and cmd == ''off'' }}'
+    sequence: !input off_button_3_short
+  - conditions:
+    - '{{ button == 3 and cmd == ''move_with_on_off'' }}'
+    sequence:
+    - if:
+      - condition:
+        - '{{ args[11] == "U" }}'
+      then: !input on_button_3_long
+      else: !input off_button_3_long
+  - conditions:
+    - '{{ button == 3 and cmd == ''stop_with_on_off'' }}'
+    sequence: !input on_off_button_3_release
+  - conditions:
+    - '{{ button == 4 and cmd == ''on'' }}'
+    sequence: !input on_button_4_short
+  - conditions:
+    - '{{ button == 4 and cmd == ''off'' }}'
+    sequence: !input off_button_4_short
+  - conditions:
+    - '{{ button == 4 and cmd == ''move_with_on_off'' }}'
+    sequence:
+    - if:
+      - condition:
+        - '{{ args[11] == "U" }}'
+      then: !input on_button_4_long
+      else: !input off_button_4_long
+  - conditions:
+    - '{{ button == 4 and cmd == ''stop_with_on_off'' }}'
+    sequence: !input on_off_button_4_release
