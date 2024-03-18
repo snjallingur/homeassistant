@@ -12,7 +12,7 @@ blueprint:
 
     '
   domain: automation
-  source_url: https://github.com/Bekkie/ha-blueprints/blob/main/automation/robb-smarrt-8-switch-ROB_200-007-0.yaml
+  source_url: https://raw.githubusercontent.com/snjallingur/homeassistant/master/automations/blueprints/Zigbee-8-button-remote-Sunricher.yaml
   input:
     remote:
       name: Remote
