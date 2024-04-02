@@ -17,9 +17,9 @@ substitutions:
   panel_recv_topic: "tele/nspanel-snjallingur/RESULT"
   panel_send_topic: "cmnd/nspanel-snjallingur/CustomSend"
   #tft_url: https://<yourHAaddress>/local/uploads/nspanel/nspanel.tft
-  mqttbroker: 192.168.132.135
-  mqttuser: "homeassistant"
-  mqttpassword: "snjallingur"
+  mqttbroker: 192.168.xxx.xxx
+  mqttuser: "<yourmqttusername>"
+  mqttpassword: "<yourmqttpassword>"
   tft_url: http://nspanel.pky.eu/lui-release.tft
 
 
@@ -56,7 +56,7 @@ captive_portal:
 # Logger. Disable the temperature sensor etc. to focus on the HMI development
 logger:
   baud_rate: 115200
-  level: DEBUG
+  level: ERROR
   logs:
     sensor: WARN
     resistance: WARN
