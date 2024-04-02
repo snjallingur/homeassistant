@@ -10,16 +10,17 @@
 ##### GENEREL CONFIG ########
 substitutions:
   node_name: snjallingur-nspanel  # $node_name
-  device_name: snjallingur-nspanel # $device_name
+  device_name: snjallingur_nspanel # $device_name
   #wifi_ssid: xxxxx
   #wifi_pass: xxxxxxxx
-  friendly_devicename: NSPanel Entrance
-  panel_recv_topic: "tele/nspanel/RESULT"
-  panel_send_topic: "cmnd/nspanel/CustomSend"
+  friendly_devicename: NSPanel Snjallingur
+  panel_recv_topic: "tele/nspanel-snjallingur/RESULT"
+  panel_send_topic: "cmnd/nspanel-snjallingur/CustomSend"
   #tft_url: https://<yourHAaddress>/local/uploads/nspanel/nspanel.tft
-  mqttbroker: 192.168.xxx.xxx
-  mqttuser: "yourmqttuser"
-  mqttpassword: "yourmqttpassword"
+  mqttbroker: 192.168.132.135
+  mqttuser: "homeassistant"
+  mqttpassword: "snjallingur"
+  tft_url: http://nspanel.pky.eu/lui-release.tft
 
 
 ##### ESP home CONFIG #####
@@ -55,7 +56,7 @@ captive_portal:
 # Logger. Disable the temperature sensor etc. to focus on the HMI development
 logger:
   baud_rate: 115200
-  level: INFO
+  level: DEBUG
   logs:
     sensor: WARN
     resistance: WARN
@@ -77,12 +78,12 @@ mqtt:
   broker: $mqttbroker
   username: $mqttuser
   password: $mqttpassword
-  client_id: ${device_name}
+  client_id: $device_name
 
 nspanel_lovelace:
-  id: nspanel_entrance
-  mqtt_recv_topic: ${panel_recv_topic}
-  mqtt_send_topic: ${panel_send_topic}
+  id: $device_name
+  mqtt_recv_topic: $panel_recv_topic
+  mqtt_send_topic: $panel_send_topic
   #on_incoming_message:
 
 # Uart for the Nextion display
@@ -98,7 +99,7 @@ api:
         url: string
       then:
         - lambda: |-
-            id(nspanel_entrance).upload_tft(url);
+            id($device_name).upload_tft(url);
     # Service to play a rtttl tone
     - service: play_rtttl
       variables:
@@ -111,21 +112,21 @@ api:
       variables:
         cmd: string
       then:
-        - lambda: "id(nspanel_entrance).send_custom_command(cmd.c_str());"
+        - lambda: "id($device_name).send_custom_command(cmd.c_str());"
     # Service to send a command To show the screen of a specific like
     - service: show_entity
       variables:
         entity: string
         title: string
       then:
-        - lambda: 'id(nspanel_entrance).send_custom_command("pageType~popupLight~" + title + "~" + entity);'
+        - lambda: 'id($device_name).send_custom_command("pageType~popupLight~" + title + "~" + entity);'
     # Service to send a command To show the screen of a specific like
     - service: notify_on_screensaver
       variables:
         line1: string
         line2: string
       then:
-        - lambda: 'id(nspanel_entrance).send_custom_command("notify~" + line1 + "~" + line2);'
+        - lambda: 'id($device_name).send_custom_command("notify~" + line1 + "~" + line2);'
         - rtttl.play: "short:d=4,o=5,b=100:16e6"
     # Service to pusblish to mqtt used for refreshin the panel
     - service: publish_to_recv_topic
@@ -138,7 +139,7 @@ api:
     # Service to send a command wake the screen
     - service: wake
       then:
-        - lambda: 'id(nspanel_entrance).send_custom_command("wake");'
+        - lambda: 'id($device_name).send_custom_command("wake");'
     # Service to send a command to show screensaver (some of the values are hardcoded)
     - service: show_screensaver
       then:
@@ -157,24 +158,24 @@ api:
     # Service to send a command disable screensaver
     - service: disable_screensaver
       then:
-        - lambda: 'id(nspanel_entrance).send_custom_command("timeout~0");'
+        - lambda: 'id($device_name).send_custom_command("timeout~0");'
     # Service to send a command enabled screensaver
     - service: enable_screensaver
       then:
-        - lambda: 'id(nspanel_entrance).send_custom_command("timeout~20");'
+        - lambda: 'id($device_name).send_custom_command("timeout~20");'
     # Service to send a command wake the screen
     - service: dim_0_to_100
       variables:
         intensity: string
       then:
-        - lambda: 'id(nspanel_entrance).send_custom_command("dimmode~"+intensity+"~100");'
+        - lambda: 'id($device_name).send_custom_command("dimmode~"+intensity+"~100");'
     # Service to send a command To show the screen of a specific like
     - service: show_entity
       variables:
         entity: string
         title: string
       then:
-        - lambda: 'id(nspanel_entrance).send_custom_command("pageType~popupLight~" + title + "~" + entity);'
+        - lambda: 'id($device_name).send_custom_command("pageType~popupLight~" + title + "~" + entity);'
     # Service to send a command To show the screen of a specific like
     # interaction of the buttons are on implemented yet
     - service: notify_fullscreen
@@ -186,10 +187,10 @@ api:
         time_secs: string
       then:
         # show notification screen
-        - lambda: 'id(nspanel_entrance).send_custom_command("pageType~popupNotify");'
+        - lambda: 'id($device_name).send_custom_command("pageType~popupNotify");'
         # set values on notification screen
         # color defined as number created in binary and converted to decimal (rrrrggggbbbbaaaa)
-        - lambda: 'id(nspanel_entrance).send_custom_command("entityUpdateDetail~id~"+ title + "~65535~" + button1 +"~3840~" + button2 + "~61440~" + description + "~65535~" + time_secs);'
+        - lambda: 'id($device_name).send_custom_command("entityUpdateDetail~id~"+ title + "~65535~" + button1 +"~3840~" + button2 + "~61440~" + description + "~65535~" + time_secs);'
         - rtttl.play: "scale_up:d=32,o=5,b=100:c,c#,d#,e,f#,g#,a#,b"
 
 sensor:
@@ -199,6 +200,7 @@ sensor:
     pin: 38
     update_interval: 10s
     attenuation: 11db
+    name: $friendly_devicename ntc_source
 
   # Internal temperature sensor, adc reading converted to resistance (calculation)
   - platform: resistance
@@ -206,6 +208,7 @@ sensor:
     sensor: ntc_source
     configuration: DOWNSTREAM
     resistor: 11.2kOhm
+    name: $friendly_devicename Resistance
 
   # Internal temperature sensor, resistance to temperature (calculation)
   - platform: ntc
@@ -224,6 +227,7 @@ output:
     id: buzzer_out
     pin:
       number: 21
+    #name: $friendly_devicename Buzzer
 
 # Rtttl function for buzzer
 rtttl:
@@ -240,7 +244,7 @@ switch:
     on_turn_on:
       # show a light on the panel when we swich on the light
       # - lambda: 'id(nspanel).send_custom_command("pageType~popupLight~[TITLE TO SHOW ON SCREEN]~[ENTITY NAME]");'
-      - lambda: 'id(nspanel_entrance).send_custom_command("pageType~popupLight~Light 1~light.bed_light");'
+      - lambda: 'id($device_name).send_custom_command("pageType~popupLight~Light 1~light.bed_light");'
     on_turn_off:
       # send to screensaver when switch off the light
       - mqtt.publish:
@@ -255,7 +259,7 @@ switch:
       number: 19
     on_turn_on:
       # show a light on the panel when we swich on the light
-      - lambda: 'id(nspanel_entrance).send_custom_command("pageType~popupLight~Light 2~light.bed_light2");'
+      - lambda: 'id($device_name).send_custom_command("pageType~popupLight~Light 2~light.bed_light2");'
     on_turn_off:
       # send to screensaver when switch off the light
       - mqtt.publish:
@@ -273,31 +277,31 @@ switch:
     restore_mode: ALWAYS_ON
 
 # Binary sensors
-#binary_sensor:
+binary_sensor:
   # Left button below the display
-#  - platform: gpio
-#    name: $friendly_devicename Left Button
-#    pin:
-#      number: GPIO14
-#      inverted: true
-#    id: left_button
-#    on_press:
-#      then:
-#        - switch.turn_on: relay_1
+  - platform: gpio
+    name: $friendly_devicename Left Button
+    pin:
+      number: GPIO14
+      inverted: true
+    id: left_button
+    on_press:
+      then:
+        - switch.turn_on: relay_1
 
   # Right button below the display
-#  - platform: gpio
-#    name: $friendly_devicename Right Button
-#    pin:
-#      number: GPIO27
-#      inverted: true
-#    id: right_button
-#    on_press:
-#      then:
-#        - switch.toggle: relay_2
+  - platform: gpio
+    name: $friendly_devicename Right Button
+    pin:
+      number: GPIO27
+      inverted: true
+    id: right_button
+    on_press:
+      then:
+        - switch.toggle: relay_2
 
 ###### A reboot button is always useful #####
 button:
   - platform: restart
-    name: ${device_name} Restart
+    name: $friendly_devicename Restart
     id: restart_nspanel
