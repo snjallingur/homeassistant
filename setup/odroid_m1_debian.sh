@@ -6,6 +6,11 @@ sudo nano /etc/default/flash-kernel
 #LINUX_KERNEL_CMDLINE="systemd.unified_cgroup_hierarchy=0 quiet splash security=apparmor apparmor=1"
 #update boot file
 sudo update-bootscript
+#add apparmor to GRUB
+sudo nano /etc/default/grub
+#add systemd.unified_cgroup_hierarchy=0 quiet splash security=apparmor apparmor=1
+sudo update-grub
+
 
 #sudo useradd -m -s $(which bash) -G sudo snjallingur
 #passwd snjallingur
