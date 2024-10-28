@@ -1,3 +1,17 @@
+#fix problems with getting IP address and resolve DNS names
+sudo nano /etc/network/interfaces
+#to get a list of network interfaces available type
+#ip link show
+#ensure the following lines exist
+#auto eth0
+#allow-hotplug eth0
+#iface eth0 inet dhcp
+sudo nano /etc/resolv.conf
+#change/add nameservers
+#nameserver 1.1.1.1
+#nameserver 1.1.1.4
+sudo service networking restart 
+#
 #Modify the Kernel loader file
 sudo nano /etc/default/flash-kernel
 #add apparmor=1 security=apparmor
