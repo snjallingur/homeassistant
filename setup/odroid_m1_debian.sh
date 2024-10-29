@@ -1,3 +1,15 @@
+#Modify /boot/config.ini
+; Device Tree Overlay
+overlay_resize=16384
+overlay_profile=
+overlays="spi0 i2c0 i2c1 uart0 uart1"
+
+[overlay_custom]
+overlays="i2c0 i2c1"
+
+[overlay_hktft32]
+overlays="hktft32 ads7846"
+#
 #fix problems with getting IP address and resolve DNS names
 sudo nano /etc/network/interfaces
 #to get a list of network interfaces available type
