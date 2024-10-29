@@ -10,7 +10,12 @@ sudo nano /etc/resolv.conf
 #change/add nameservers
 #nameserver 1.1.1.1
 #nameserver 1.1.1.4
-sudo service networking restart 
+sudo service networking restart
+sudp apt-get install systemd-resolved
+sudo nano /etc/systemd/resolved.conf
+#change/add nameservers
+#DNS=1.1.1.1
+#FallbackDNS=1.0.0.1
 #
 #Modify the Kernel loader file
 sudo nano /etc/default/flash-kernel
