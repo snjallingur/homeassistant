@@ -141,3 +141,8 @@ git clone https://github.com/brektrou/rtl8821CU.git
 cd rtl8821CU
 chmod +x dkms-install.sh
 sudo ./dkms-install.sh
+
+
+#install unattended upgrades
+sudo apt-get install unattended-upgrades apt-listchanges
+sudo nano /etc/apt/apt.conf.d/50unattended-upgrades
