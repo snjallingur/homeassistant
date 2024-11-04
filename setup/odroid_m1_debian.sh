@@ -18,6 +18,8 @@ sudo nano /etc/network/interfaces
 #auto eth0
 #allow-hotplug eth0
 #iface eth0 inet dhcp
+sudo apt-get install net-tools
+#ifconfig
 sudo nano /etc/resolv.conf
 #change/add nameservers
 #nameserver 1.1.1.1
