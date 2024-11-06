@@ -18,6 +18,9 @@ sudo nano /etc/network/interfaces
 #auto eth0
 #allow-hotplug eth0
 #iface eth0 inet dhcp
+#
+#restart after a change with 
+# service networking restart
 sudo apt-get install net-tools
 #ifconfig
 sudo nano /etc/resolv.conf
@@ -66,7 +69,6 @@ sudo apt-get -y install apparmor cifs-utils dbus jq libglib2.0-bin lsb-release n
 sudo nano /etc/NetworkManager/NetworkManager.conf
 #change to 
 #dns=none 
-sudo apt --fix-broken install
 sudo reboot
 #Docker installation
 curl -fsSL https://get.docker.com -o get-docker.sh
