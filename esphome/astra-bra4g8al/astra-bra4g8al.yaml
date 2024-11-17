@@ -1,0 +1,195 @@
+esphome:
+  name: esphome-web-6c749c
+  on_boot:
+  # buzzeron on startup
+    priority: -100
+    then:
+      - rtttl.play: 'A-Team:d=8,o=5,b=125:4d#6,a#,2d#6,16p,g#,4a#,4d#.,p,16g,16a#,d#6,a#,f6,2d#6,16p,c#.6,16c6,16a#,g#.,2a#'
+
+ota:
+  - platform: esphome
+
+esp32:
+  board: esp32dev
+  framework:
+    type: arduino
+
+# Enable logging
+logger:
+  level: INFO
+
+status_led:
+  pin:
+    number: GPIO4
+    inverted: true
+
+output:
+  - platform: ledc
+    pin: GPIO12
+    id: rtttl_out
+
+rtttl:
+  output: rtttl_out
+
+# Enable Home Assistant API
+api:
+
+
+wifi:
+  #ssid: !secret wifi_ssid
+  #password: !secret wifi_password
+  #manual_ip:
+  #  static_ip: 192.168.1.110
+  #  gateway: 192.168.1.1
+  #  subnet: 255.255.255.0
+  ap:
+    ssid: "snjallingur"
+    password: "snjallingur"
+# Example configuration entry
+
+web_server:
+  port: 80
+
+captive_portal:
+
+#remote_receiver:
+#  pin: GPIO27
+#  dump: rc_switch
+  # Settings to optimize recognition of RF devices
+#  tolerance: 50%
+#  filter: 50us
+#  idle: 4ms
+#  buffer_size: 2kb
+
+switch:
+  - platform: gpio
+    name: "Relay 1"
+    pin: 25
+    id: relay1
+  - platform: gpio
+    name: "Relay 2"
+    pin: 26
+    id: relay2
+  - platform: gpio
+    name: "Relay 3"
+    pin: 33
+    id: relay3
+  - platform: gpio
+    name: "Relay 4"
+    pin: 32
+    id: relay4
+    
+# Dallas DS18B20s temperature sensor
+# https://esphome.io/components/sensor/dallas.html
+one_wire:
+  - platform: gpio
+    pin: GPIO27
+
+# Note you don't have to add any sensors at this point
+   
+#[16:26:38][D][dallas.sensor:084]:     0xdc3cd4e381077028
+#[16:26:38][D][dallas.sensor:084]:     0x013ce5e381dae128
+# Individual sensors
+sensor:
+  - platform: dallas_temp
+    address: 0xdc3cd4e381077028
+    name: "BS18B20-1 Temperature"
+  - platform: dallas_temp
+    address: 0x013ce5e381dae128
+    name: "BS18B20-2 Temperature"
+
+
+binary_sensor:
+  - platform: gpio
+    name: "SWITCH 1"
+    pin: 
+      number: 34
+      mode:
+        input: true
+
+  - platform: gpio
+    name: "SWITCH 2"
+    pin: 
+      number: 35
+      mode:
+        input: true
+
+  - platform: gpio
+    name: "SWITCH 3"
+    pin: 
+      number: 36
+      mode:
+        input: true
+
+  - platform: gpio
+    name: "SWITCH 4"
+    pin: 
+      number: 39
+      mode:
+        input: true
+
+#  - platform: remote_receiver
+#    name: "Button A"
+#    device_class: motion
+#    rc_switch_raw:
+#      code: "011100100110101000001000"
+#      protocol: 1
+#    on_press:
+#      then:
+#        - switch.toggle: relay1
+
+#  - platform: remote_receiver
+#    name: "Button B"
+#    device_class: motion
+#    rc_switch_raw:
+#      code: "011100100110101000000100"
+#      protocol: 1
+#    on_press:
+#      then:
+#        - switch.toggle: relay2    
+
+#  - platform: remote_receiver
+#    name: "Button C"
+#    device_class: motion
+#    rc_switch_raw:
+#      code: "011100100110101000000010"
+#      protocol: 1
+#    on_press:
+#      then:
+#        - switch.toggle: relay3          
+
+#  - platform: remote_receiver
+#    name: "Button D"
+#    device_class: motion
+#    rc_switch_raw:
+#      code: "011100100110101000000001"
+#      protocol: 1
+#    on_press:
+#      then:
+#        - switch.toggle: relay4  
+
+#  - platform: remote_receiver
+#    name: "Button ALL ON"
+#    device_class: motion
+#    rc_switch_raw:
+#      code: "000001000111010100000001"
+#      protocol: 1
+#    on_press:
+#      then:
+#        - switch.turn_on: relay1
+#        - switch.turn_on: relay2        
+#        - switch.turn_on: relay3        
+#        - switch.turn_on: relay4                
+
+#  - platform: remote_receiver
+#    name: "Button ALL OFF"
+#    device_class: motion
+#    rc_switch_raw:
+#      code: "000001000111010100000010"
+#      protocol: 1
+#    on_press:
+#      then:
+#        - switch.turn_off: relay1
+#        - switch.turn_off: relay2        
+#        - switch.turn_off: relay3        
+#        - switch.turn_off: relay4       
