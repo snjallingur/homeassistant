@@ -1,0 +1,89 @@
+esphome:
+  name: sonoff4chr3-lucifer
+
+esp8266:
+  board: esp8285
+
+wifi:
+  #ssid: !secret wifi_ssid
+  #password: !secret wifi_password
+  power_save_mode: none
+  #manual_ip:
+  #  static_ip: 192.168.xxx.xxx
+  #  gateway: 192.168.xxx.xxx
+  #  subnet: 255.255.255.0
+  #use_address: nspanel-appdaemon.local
+  ap:
+    ssid: "snjallingur"
+    password: "snjallingur"
+
+captive_portal:
+
+api:
+
+logger:
+
+ota:
+
+binary_sensor:
+  - platform: gpio
+    pin:
+      number: GPIO0
+      mode:
+        input: true
+        pullup: true
+      inverted: true
+    name: "Sonoff 4CH Button 1"
+  - platform: gpio
+    pin:
+      number: GPIO9
+      mode:
+        input: true
+        pullup: true
+      inverted: true
+    name: "Sonoff 4CH Button 2"
+  - platform: gpio
+    pin:
+      number: GPIO10
+      mode:
+        input: true
+        pullup: true
+      inverted: true
+    name: "Sonoff 4CH Button 3"
+  - platform: gpio
+    pin:
+      number: GPIO14
+      mode:
+        input: true
+        pullup: true
+      inverted: true
+    name: "Sonoff 4CH Button 4"
+  - platform: status
+    name: "Sonoff 4CH Status"
+
+switch:
+  - platform: gpio
+    name: "Sonoff 4CH Relay 1"
+    pin: GPIO12
+  - platform: gpio
+    name: "Sonoff 4CH Relay 2"
+    pin: GPIO5
+  - platform: gpio
+    name: "Sonoff 4CH Relay 3"
+    pin: GPIO4
+  - platform: gpio
+    name: "Sonoff 4CH Relay 4"
+    pin: GPIO15
+
+output:
+  # Register the blue LED as a dimmable output ....
+  - platform: esp8266_pwm
+    id: blue_led
+    pin: GPIO13
+    inverted: true
+
+light:
+  # ... and then make a light out of it.
+  - platform: monochromatic
+    name: "Sonoff 4CH Blue LED"
+    output: blue_led
