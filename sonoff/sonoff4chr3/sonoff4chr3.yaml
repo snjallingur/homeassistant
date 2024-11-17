@@ -17,6 +17,10 @@ wifi:
     ssid: "snjallingur"
     password: "snjallingur"
 
+# Example configuration entry
+web_server:
+  port: 80
+
 captive_portal:
 
 api:
@@ -24,57 +28,56 @@ api:
 logger:
 
 ota:
-
-binary_sensor:
-  - platform: gpio
-    pin:
-      number: GPIO0
-      mode:
-        input: true
-        pullup: true
-      inverted: true
-    name: "Sonoff 4CH Button 1"
-  - platform: gpio
-    pin:
-      number: GPIO9
-      mode:
-        input: true
-        pullup: true
-      inverted: true
-    name: "Sonoff 4CH Button 2"
-  - platform: gpio
-    pin:
-      number: GPIO10
-      mode:
-        input: true
-        pullup: true
-      inverted: true
-    name: "Sonoff 4CH Button 3"
-  - platform: gpio
-    pin:
-      number: GPIO14
-      mode:
-        input: true
-        pullup: true
-      inverted: true
-    name: "Sonoff 4CH Button 4"
-  - platform: status
-    name: "Sonoff 4CH Status"
+  - platform: esphome
 
 switch:
   - platform: gpio
     name: "Sonoff 4CH Relay 1"
     pin: GPIO12
+    id: relay1
   - platform: gpio
     name: "Sonoff 4CH Relay 2"
     pin: GPIO5
+    id: relay2
   - platform: gpio
     name: "Sonoff 4CH Relay 3"
     pin: GPIO4
+    id: relay3
   - platform: gpio
     name: "Sonoff 4CH Relay 4"
     pin: GPIO15
+    id: relay4
 
+# Define buttons for the Sonoff 4CH
+binary_sensor:
+  - platform: gpio
+    pin:
+      number: GPIO0
+      mode: INPUT_PULLUP
+    name: "Button 1 pressed"
+    on_press:
+      - switch.toggle: relay1
+  - platform: gpio
+    pin:
+      number: GPIO9
+      mode: INPUT_PULLUP
+    name: "Button 2 pressed"
+    on_press:
+      - switch.toggle: relay2
+  - platform: gpio
+    pin:
+      number: GPIO10
+      mode: INPUT_PULLUP
+    name: "Button 3 pressed"
+    on_press:
+      - switch.toggle: relay3
+  - platform: gpio
+    pin:
+      number: GPIO14
+      mode: INPUT_PULLUP
+    name: "Button 4 pressed"
+    on_press:
+      - switch.toggle: relay4
 output:
   # Register the blue LED as a dimmable output ....
   - platform: esp8266_pwm
