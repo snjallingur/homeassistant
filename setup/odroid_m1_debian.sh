@@ -63,7 +63,7 @@ sudo usermod -aG sudo snjallingur
 sudo apt-get -y install  libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev git bluez
 sudo apt-get -y install apt-transport-https ca-certificates curl gnupg lsb-release pkg-config build-essential libgpiod-dev
 sudo apt-get -y install make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev git
-sudo apt-get -y install -y python3 python3-dev python3-pip odroid-wiringpi libwiringpi-dev apparmor-utils uidmap
+sudo apt-get -y install -y python3 python3-dev python3-pip apparmor-utils uidmap
 sudo apt-get -y install apparmor cifs-utils dbus jq libglib2.0-bin lsb-release network-manager nfs-common systemd-journal-remote udisks2 wget
 #systemd-resolved 
 sudo nano /etc/NetworkManager/NetworkManager.conf
