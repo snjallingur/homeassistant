@@ -1,0 +1,8 @@
+Flashing tutorial: https://www.youtube.com/watch?v=FH2KL-5riRQ
+
+Firmware available from: https://ota.tasmota.com/tasmota32/release/
+
+Erase Flash: esptool.py -p /dev/cu.usbserial-6 -b 115200  erase_flash
+
+Flash with: esptool.py -p /dev/cu.usbserial-6 -b 115200  write_flash 0x0 tasmota32-zbbrdgpro.factory.bin
+
